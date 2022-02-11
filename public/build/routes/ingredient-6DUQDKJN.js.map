@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["browser-route-module:/Users/johncarmack/Coding/vegifyapp/vegify/app/routes/ingredient.tsx?browser"],
+  "sourcesContent": ["export * from \"/Users/johncarmack/Coding/vegifyapp/vegify/app/routes/ingredient.tsx\";"],
+  "mappings": ";;;;;AAAA;",
+  "names": []
+}

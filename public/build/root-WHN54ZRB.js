@@ -1,0 +1,1 @@
+import{e,f as o}from"/build/_shared/chunk-AKSB5QXU.js";o();o();function t(){return e.createElement("html",{lang:"en"},e.createElement("head",null,e.createElement("meta",{charSet:"utf-8"}),e.createElement("title",null,"Remix: So great, it's funny!")),e.createElement("body",null,"Hello world",null))}export{t as default};
