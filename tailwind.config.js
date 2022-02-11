@@ -1,6 +1,6 @@
 module.exports = {
   content: [
-    "./src/**/*.{js,jsx,ts,tsx}",
+    "./app/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
     colors: {
@@ -12,7 +12,11 @@ module.exports = {
       'gray': '#8a8b8a',
       'gray-light': '#f1f1f1',
     },
-    fontFamily: {    },
+    fontFamily: {
+      'sans': ['Avenir Next LT Pro', 'sans-serif'],
+      'serif': ['Adelle','serif'],
+      'mono': ['SFMono-Regular','ui-monospace']
+        },
     extend: {
       spacing: {      },
       borderRadius: {      }
