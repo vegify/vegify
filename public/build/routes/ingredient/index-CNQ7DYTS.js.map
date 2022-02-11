@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["browser-route-module:/Users/johncarmack/Coding/vegifyapp/vegify/app/routes/ingredient/index.tsx?browser", "../../../../app/routes/ingredient/index.tsx"],
+  "sourcesContent": ["export { default } from \"/Users/johncarmack/Coding/vegifyapp/vegify/app/routes/ingredient/index.tsx\";", "export default function IngredientIndexRoute() {\n    return (\n      <div>\n        <p>Here's a random ingredient:</p>\n        <p>\n          Salt\n        </p>\n      </div>\n    );\n  }"],
+  "mappings": ";;;;;;AAAA;;;ACAA;AAAe,gCAAgC;AAC3C,SACE,oCAAC,OAAD,MACE,oCAAC,KAAD,MAAG,gCACH,oCAAC,KAAD,MAAG;AAAA;",
+  "names": []
+}

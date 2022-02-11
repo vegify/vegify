@@ -1,6 +1,13 @@
-node_modules
+.DS_Store
+.vscode
+.DS_Store
 
-/.cache
-/server/build
-/public/build
+/build/
+node_modules/
+
+/JOHN_TODOS.md
+
+.eslintcache
+
+fly.toml
 .env
