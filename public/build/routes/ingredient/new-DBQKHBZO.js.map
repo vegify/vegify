@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["browser-route-module:/Users/johncarmack/Coding/vegifyapp/vegify/app/routes/ingredient/new.tsx?browser", "../../../../app/routes/ingredient/new.tsx"],
-  "sourcesContent": ["export { default } from \"/Users/johncarmack/Coding/vegifyapp/vegify/app/routes/ingredient/new.tsx\";", "export default function NewIngredientRoute() {\n    return (\n      <div>\n        <p>Add your own delicious ingredient</p>\n        <form method=\"post\">\n          <div>\n            <label>\n              Name: <input type=\"text\" name=\"name\" />\n            </label>\n          </div>\n          <div>\n            <label>\n              Description: <textarea name=\"content\" />\n            </label>\n          </div>\n          <div>\n            <button type=\"submit\" className=\"button\">\n              Add\n            </button>\n          </div>\n        </form>\n      </div>\n    );\n  }"],
-  "mappings": ";;;;;;AAAA;;;ACAA;AAAe,8BAA8B;AACzC,SACE,oCAAC,OAAD,MACE,oCAAC,KAAD,MAAG,sCACH,oCAAC,QAAD;AAAA,IAAM,QAAO;AAAA,KACX,oCAAC,OAAD,MACE,oCAAC,SAAD,MAAO,UACC,oCAAC,SAAD;AAAA,IAAO,MAAK;AAAA,IAAO,MAAK;AAAA,QAGlC,oCAAC,OAAD,MACE,oCAAC,SAAD,MAAO,iBACQ,oCAAC,YAAD;AAAA,IAAU,MAAK;AAAA,QAGhC,oCAAC,OAAD,MACE,oCAAC,UAAD;AAAA,IAAQ,MAAK;AAAA,IAAS,WAAU;AAAA,KAAS;AAAA;",
-  "names": []
-}
