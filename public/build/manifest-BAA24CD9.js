@@ -1,1 +1,0 @@
-window.__remixManifest={"version":"baa24cd9","entry":{"module":"/build/entry.client-S4OKD7JV.js","imports":["/build/_shared/chunk-NOUPZE4Z.js"]},"routes":{"root":{"id":"root","path":"","module":"/build/root-5K2OM72Q.js","hasAction":false,"hasLoader":false,"hasCatchBoundary":false,"hasErrorBoundary":false}},"url":"/build/manifest-BAA24CD9.js"};

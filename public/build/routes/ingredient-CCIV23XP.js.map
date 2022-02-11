@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["browser-route-module:/Users/johncarmack/Coding/vegifyapp/vegify/app/routes/ingredient.tsx?browser", "../../../app/routes/ingredient.tsx"],
-  "sourcesContent": ["export { default } from \"/Users/johncarmack/Coding/vegifyapp/vegify/app/routes/ingredient.tsx\";", "import { Outlet } from \"remix\";\n\nexport default function IngredientRoute() {\n  return (\n    <div>\n      <h1>\uD83E\uDDC2ngredient</h1>\n      <main>\n        <Outlet />\n      </main>\n    </div>\n  );\n}"],
-  "mappings": ";;;;;;;;;AAAA;;;ACAA;AAEe,2BAA2B;AACxC,SACE,oCAAC,OAAD,MACE,oCAAC,MAAD,MAAI,uBACJ,oCAAC,QAAD,MACE,oCAAC,gCAAD;AAAA;",
-  "names": []
-}

@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["browser-route-module:/Users/johncarmack/Coding/vegifyapp/vegify/app/routes/ingredient/$ingredientId.tsx?browser", "../../../../app/routes/ingredient/$ingredientId.tsx"],
-  "sourcesContent": ["export { default } from \"/Users/johncarmack/Coding/vegifyapp/vegify/app/routes/ingredient/$ingredientId.tsx\";", "export default function IngredientRoute() {\n    return (\n      <div>\n        <p>Here's your delicious ingredient:</p>\n        <p>\n          Yeast\n        </p>\n      </div>\n    );\n  }"],
-  "mappings": ";;;;;;AAAA;;;ACAA;AAAe,2BAA2B;AACtC,SACE,oCAAC,OAAD,MACE,oCAAC,KAAD,MAAG,sCACH,oCAAC,KAAD,MAAG;AAAA;",
-  "names": []
-}
