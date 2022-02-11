@@ -1,5 +1,5 @@
 {
-  "version": "31854063",
+  "version": "46849159",
   "entry": {
     "module": "/build/entry.client-AQK3KY3S.js",
     "imports": [
@@ -11,7 +11,7 @@
     "root": {
       "id": "root",
       "path": "",
-      "module": "/build/root-Y7CFKJYT.js",
+      "module": "/build/root-ZCTX3Y26.js",
       "hasAction": false,
       "hasLoader": false,
       "hasCatchBoundary": false,
@@ -68,5 +68,5 @@
       "hasErrorBoundary": false
     }
   },
-  "url": "/build/manifest-31854063.js"
+  "url": "/build/manifest-46849159.js"
 }

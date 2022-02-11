@@ -1,9 +1,4 @@
 import { LiveReload, Outlet } from "remix";
-import styles from "./tailwind.css";
-
-export function links() {
-  return [{ rel: "stylesheet", href: styles }];
-}
 
 export default function App() {
   return (
