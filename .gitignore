@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 node_modules
 /.cache
 /build
@@ -8,3 +9,18 @@ prisma/dev.db
 
 JOHN_TODOS.md
 README deploy.md
+=======
+.DS_Store
+.vscode
+.DS_Store
+
+/build/
+node_modules/
+
+/JOHN_TODOS.md
+
+.eslintcache
+
+fly.toml
+.env
+>>>>>>> parent of f54aa0a (fixing gitignore)
