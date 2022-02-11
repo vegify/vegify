@@ -1,0 +1,11 @@
+{
+  "scripts": [
+    "main.js",
+    "runtime.js",
+    "vendor.js",
+    "components.js"
+  ],
+  "styles": [
+    "main.css"
+  ]
+}
