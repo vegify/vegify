@@ -1,0 +1,369 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model amount {
+  id                                         Int                    @id(map: "amount_pk") @default(autoincrement())
+  unit                                       String                 @db.VarChar
+  amount                                     Decimal?               @db.Decimal
+  grams                                      Decimal                @db.Decimal
+  ingredient_amountToingredient_batch_size   ingredient[]           @relation("amountToingredient_batch_size")
+  ingredient_amountToingredient_serving_size ingredient[]           @relation("amountToingredient_serving_size")
+  ingredient_in_recipe                       ingredient_in_recipe[]
+}
+
+model app_user {
+  id                     Int                      @id(map: "id") @default(autoincrement())
+  username               String                   @db.VarChar
+  img_id                 Int?
+  bio                    String?                  @db.VarChar
+  website                String?                  @db.VarChar
+  email                  String                   @db.VarChar
+  pwd                    String                   @db.VarChar
+  img                    img?                     @relation(fields: [img_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "user_img")
+  recipe                 recipe[]
+  recipe_review          recipe_review[]
+  recipe_user            recipe_user[]
+  user_biometrics        user_biometrics?
+  user_demographics      user_demographics[]
+  user_nutrition_profile user_nutrition_profile[]
+}
+
+model href {
+  id                                       Int       @id(map: "href_pk") @default(autoincrement())
+  url                                      String    @db.VarChar
+  desc                                     String    @db.VarChar
+  product_hrefToproduct_amazon_link        product[] @relation("hrefToproduct_amazon_link")
+  product_hrefToproduct_store_locator_link product[] @relation("hrefToproduct_store_locator_link")
+}
+
+model img {
+  id                    Int                     @id(map: "img_pk") @default(autoincrement())
+  desc                  String?                 @db.VarChar
+  url                   String                  @db.VarChar
+  app_user              app_user[]
+  img_tag               img_tag[]
+  ingredient_img        ingredient_img[]
+  nutrient_img          nutrient_img[]
+  nutrition_profile_img nutrition_profile_img[]
+  product_img           product_img[]
+  recipe_step_img       recipe_step_img[]
+  review_img            review_img[]
+}
+
+model img_tag {
+  img_tag_id Int @id(map: "img_tag_pk") @default(autoincrement())
+  img_id     Int
+  tag_id     Int
+  img        img @relation(fields: [img_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "img_tag_img")
+  tag        tag @relation(fields: [tag_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "img_tag_tag")
+}
+
+model ingredient {
+  id                                     Int                                  @id(map: "ingredient_pk") @default(autoincrement())
+  name                                   String?                              @db.VarChar
+  desc                                   String?                              @db.VarChar
+  is_vegan                               Boolean
+  serving_size                           Int?
+  batch_size                             Int?
+  amount_amountToingredient_batch_size   amount?                              @relation("amountToingredient_batch_size", fields: [batch_size], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "ingredient_batch_size")
+  amount_amountToingredient_serving_size amount?                              @relation("amountToingredient_serving_size", fields: [serving_size], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "ingredient_serving_size")
+  ingredient_img                         ingredient_img[]
+  ingredient_in_recipe                   ingredient_in_recipe[]
+  ingredient_product                     ingredient_product[]
+  ingredient_serving_nutrient_amount     ingredient_serving_nutrient_amount[]
+  ingredient_tag                         ingredient_tag[]
+  product_ingredient_label               product_ingredient_label[]
+  recipe                                 recipe[]
+}
+
+model ingredient_img {
+  id            Int        @id(map: "ingredient_img_pk") @default(autoincrement())
+  img_id        Int
+  ingredient_id Int
+  img           img        @relation(fields: [img_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "ingredient_img_img")
+  ingredient    ingredient @relation(fields: [ingredient_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "ingredient_img_ingredient")
+}
+
+model ingredient_in_recipe {
+  id                                   Int                                    @id(map: "ingredient_in_recipe_pk") @default(autoincrement())
+  recipe_id                            Int
+  ingredient_id                        Int
+  amount_id                            Int
+  amount                               amount                                 @relation(fields: [amount_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "recipe_ingredient_amount")
+  ingredient                           ingredient                             @relation(fields: [ingredient_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "recipe_ingredient_ingredient")
+  recipe                               recipe                                 @relation(fields: [recipe_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "recipe_recipe_ingredient")
+  ingredient_in_recipe_nutrient_amount ingredient_in_recipe_nutrient_amount[]
+}
+
+model ingredient_in_recipe_nutrient_amount {
+  id                      Int                  @id(map: "ingredient_in_recipe_nutrient_amount_pk") @default(autoincrement())
+  unit                    String               @db.VarChar
+  amount                  Decimal?             @db.Decimal
+  grams                   Decimal              @db.Decimal
+  nutrient_id             Int
+  ingredient_in_recipe_id Int
+  ingredient_in_recipe    ingredient_in_recipe @relation(fields: [ingredient_in_recipe_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "recipe_ingredient_nutrient_amount_recipe_ingredient")
+  nutrient                nutrient             @relation(fields: [nutrient_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "ingredient_in_recipe_nutrient_amount_nutrient")
+}
+
+model ingredient_product {
+  id            Int        @id(map: "ingredient_product_pk") @default(autoincrement())
+  ingredient_id Int
+  product_id    Int
+  ingredient    ingredient @relation(fields: [ingredient_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "ingredient_product_ingredient")
+  product       product    @relation(fields: [product_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "ingredient_product_product")
+}
+
+model ingredient_serving_nutrient_amount {
+  id            Int        @id(map: "ingredient_serving_nutrient_amount_pk") @default(autoincrement())
+  unit          String     @db.VarChar
+  amount        Decimal?   @db.Decimal
+  grams         Decimal    @db.Decimal
+  nutrient_id   Int
+  ingredient_id Int
+  ingredient    ingredient @relation(fields: [ingredient_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "ingredient_serving_nutrient_amount_ingredient")
+  nutrient      nutrient   @relation(fields: [nutrient_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "ingredient_serving_nutrient_amount_nutrient")
+}
+
+model ingredient_tag {
+  id            Int        @id(map: "ingredient_tag_pk") @default(autoincrement())
+  ingredient_id Int
+  tag_id        Int
+  ingredient    ingredient @relation(fields: [ingredient_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "ingredient_tag_ingredient")
+  tag           tag        @relation(fields: [tag_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "ingredient_tag_tag")
+}
+
+model nutrient {
+  id                                   Int                                    @id(map: "nutrient_pk") @default(autoincrement())
+  name                                 String                                 @db.VarChar
+  desc                                 String                                 @db.VarChar
+  ingredient_in_recipe_nutrient_amount ingredient_in_recipe_nutrient_amount[]
+  ingredient_serving_nutrient_amount   ingredient_serving_nutrient_amount[]
+  nutrient_amount                      nutrient_amount[]
+  nutrient_img                         nutrient_img[]
+  nutrition_profile_tracked_nutrient   nutrition_profile_tracked_nutrient[]
+}
+
+model nutrient_amount {
+  id          Int      @id(map: "nutrient_amount_pk") @default(autoincrement())
+  unit        String   @db.VarChar
+  amount      Decimal? @db.Decimal
+  grams       Decimal  @db.Decimal
+  nutrient_id Int
+  nutrient    nutrient @relation(fields: [nutrient_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "nutrient_amount_nutrient")
+}
+
+model nutrient_img {
+  id          Int      @id(map: "nutrient_img_pk") @default(autoincrement())
+  img_id      Int
+  nutrient_id Int
+  img         img      @relation(fields: [img_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "nutrient_img_img")
+  nutrient    nutrient @relation(fields: [nutrient_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "nutrient_img_nutrient")
+}
+
+model nutrition_profile {
+  id                                 Int                                  @id(map: "nutrition_profile_pk") @default(autoincrement())
+  name                               String                               @db.VarChar
+  img_url                            String                               @db.VarChar
+  originator_name                    String                               @db.VarChar
+  originator_url                     String                               @db.VarChar
+  desc                               String                               @db.VarChar
+  nutrition_profile_img              nutrition_profile_img[]
+  nutrition_profile_tracked_nutrient nutrition_profile_tracked_nutrient[]
+  user_nutrition_profile             user_nutrition_profile[]
+}
+
+model nutrition_profile_img {
+  id                   Int               @id(map: "nutrition_profile_img_pk") @default(autoincrement())
+  nutrition_profile_id Int
+  img_id               Int
+  img                  img               @relation(fields: [img_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "nutrition_profile_img_img")
+  nutrition_profile    nutrition_profile @relation(fields: [nutrition_profile_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "nutrition_profile_img_nutrition_profile")
+}
+
+model nutrition_profile_tracked_nutrient {
+  id                   Int               @id(map: "nutrition_profile_tracked_nutrient_pk") @default(autoincrement())
+  unit                 String            @db.VarChar
+  amount               Decimal?          @db.Decimal
+  grams                Decimal           @db.Decimal
+  nutrient_id          Int
+  nutrition_profile_id Int
+  nutrient             nutrient          @relation(fields: [nutrient_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "nutrition_profile_tracked_nutrient_nutrient")
+  nutrition_profile    nutrition_profile @relation(fields: [nutrition_profile_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "nutrition_profile_nutrient_amount_nutrition_profile")
+}
+
+model product {
+  id                                    Int                        @id(map: "product_pk") @default(autoincrement())
+  name                                  String                     @db.VarChar
+  upc                                   Int
+  price                                 Decimal                    @db.Money
+  is_vegan                              Boolean
+  amazon_link                           Int
+  store_locator_link                    Int
+  desc                                  String                     @db.VarChar
+  href_hrefToproduct_amazon_link        href                       @relation("hrefToproduct_amazon_link", fields: [amazon_link], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "store_locator_url")
+  href_hrefToproduct_store_locator_link href                       @relation("hrefToproduct_store_locator_link", fields: [store_locator_link], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "url_product_amazon_url")
+  ingredient_product                    ingredient_product[]
+  product_img                           product_img[]
+  product_ingredient_label              product_ingredient_label[]
+  product_tag                           product_tag[]
+}
+
+model product_img {
+  id               Int     @id(map: "product_img_pk") @default(autoincrement())
+  img_id           Int
+  product_id       Int
+  label            Boolean
+  nutrition_label  Boolean
+  ingredient_label Boolean
+  img              img     @relation(fields: [img_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "product_img_img")
+  product          product @relation(fields: [product_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "product_img_product")
+}
+
+model product_ingredient_label {
+  id            Int        @id(map: "product_ingredient_label_pk") @default(autoincrement())
+  product_id    Int
+  ingredient_id Int
+  ingredient    ingredient @relation(fields: [ingredient_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "product_ingredient_ingredient")
+  product       product    @relation(fields: [product_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "product_ingredient_product")
+}
+
+model product_tag {
+  id         Int     @id(map: "product_tag_pk") @default(autoincrement())
+  tag_id     Int
+  product_id Int
+  product    product @relation(fields: [product_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "product_tag_product")
+  tag        tag     @relation(fields: [tag_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "product_tag_tag")
+}
+
+model recipe {
+  id                   Int                    @id(map: "recipe_pk") @default(autoincrement())
+  as_ingredient_id     Int
+  creator_id           Int
+  subtitle             String?                @db.VarChar
+  prep_minutes         Int?
+  cook_minutes         Int?
+  total_time           Int?
+  video_id             Int
+  steps                Int
+  ingredient           ingredient             @relation(fields: [as_ingredient_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "recipe_ingredient")
+  app_user             app_user               @relation(fields: [creator_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "recipe_creator")
+  video                video                  @relation(fields: [video_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "recipe_video")
+  ingredient_in_recipe ingredient_in_recipe[]
+  recipe_review        recipe_review[]
+  recipe_step          recipe_step[]
+  recipe_tag           recipe_tag[]
+  recipe_user          recipe_user[]
+}
+
+model recipe_review {
+  id        Int      @id(map: "recipe_review_pk") @default(autoincrement())
+  review_id Int
+  recipe_id Int
+  user_id   Int
+  recipe    recipe   @relation(fields: [recipe_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "recipe_review_recipe")
+  review    review   @relation(fields: [review_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "recipe_review_review")
+  app_user  app_user @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "recipe_review_user")
+}
+
+model recipe_step {
+  id              Int               @id(map: "recipe_step_pk") @default(autoincrement())
+  header_text     String            @db.VarChar
+  main_text       String            @db.VarChar
+  video_id        Int
+  recipe_id       Int
+  recipe          recipe            @relation(fields: [recipe_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "step_recipe")
+  video           video             @relation(fields: [video_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "recipe_step_video")
+  recipe_step_img recipe_step_img[]
+}
+
+model recipe_step_img {
+  id             Int         @id(map: "recipe_step_img_pk") @default(autoincrement())
+  img_id         Int
+  recipe_step_id Int
+  img            img         @relation(fields: [img_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "recipe_step_img_img")
+  recipe_step    recipe_step @relation(fields: [recipe_step_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "recipe_step_img_recipe_step")
+}
+
+model recipe_tag {
+  id        Int    @id(map: "recipe_tag_pk") @default(autoincrement())
+  recipe_id Int
+  tag_id    Int
+  recipe    recipe @relation(fields: [recipe_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "recipe_tag_recipe")
+  tag       tag    @relation(fields: [tag_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "recipe_tag_tag")
+}
+
+model recipe_user {
+  id        Int      @id(map: "recipe_user_pk") @default(autoincrement())
+  recipe_id Int
+  user_id   Int
+  recipe    recipe   @relation(fields: [recipe_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "recipe_users_recipe")
+  app_user  app_user @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "recipe_users_user")
+}
+
+model review {
+  id            Int             @id(map: "review_pk") @default(autoincrement())
+  stars         Int
+  title         String          @db.VarChar
+  text          String          @db.VarChar
+  recipe_review recipe_review[]
+  review_img    review_img[]
+}
+
+model review_img {
+  id        Int    @id(map: "review_img_pk") @default(autoincrement())
+  review_id Int
+  img_id    Int
+  img       img    @relation(fields: [img_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "review_img_img")
+  review    review @relation(fields: [review_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "review_img_review")
+}
+
+model tag {
+  id             Int              @id(map: "tag_pk") @default(autoincrement())
+  tag            String           @db.VarChar
+  img_tag        img_tag[]
+  ingredient_tag ingredient_tag[]
+  product_tag    product_tag[]
+  recipe_tag     recipe_tag[]
+}
+
+model user_biometrics {
+  id               Int      @id(map: "user_biometrics_pk")
+  calorie_tracking Boolean
+  weight_goal      String   @db.VarChar
+  weight_in_kg     Decimal  @db.Decimal
+  height_in_cm     Decimal  @db.Decimal
+  sex_multiplier   Decimal  @db.Decimal
+  app_user         app_user @relation(fields: [id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "user_biometrics_user")
+}
+
+model user_demographics {
+  id        Int      @id(map: "user_demographics_pk") @default(autoincrement())
+  gender    String   @db.VarChar
+  birthdate DateTime @db.Timestamp(6)
+  location  String   @db.VarChar
+  user_id   Int
+  app_user  app_user @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "user_demo_user")
+}
+
+model user_nutrition_profile {
+  id                   Int               @id(map: "user_nutrition_profile_pk") @default(autoincrement())
+  user_id              Int
+  nutrition_profile_id Int
+  nutrition_profile    nutrition_profile @relation(fields: [nutrition_profile_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "user_nutrition_profile_nutrition_profile")
+  app_user             app_user          @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "user_nutrition_profile_user")
+}
+
+model video {
+  id          Int           @id(map: "video_pk") @default(autoincrement())
+  url         String        @db.VarChar
+  desc        Int
+  recipe      recipe[]
+  recipe_step recipe_step[]
+}

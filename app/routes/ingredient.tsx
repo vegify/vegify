@@ -6,7 +6,7 @@ import icon from "../img/VegifyIconWhite.svg";
 export default function IngredientRoute() {
   return (
     <div className="jokes-layout container mx-auto flex flex-col">
-      <header className="jokes-header py-4 border-gray-dark border-solid border-b-2">
+      <header className="jokes-header py-4 border-gray-light border-solid border-b-2">
         <div className="container flex justify-between items-center">
           <h1 className="home-link text-5xl font-serif">
             <Link
@@ -26,8 +26,8 @@ export default function IngredientRoute() {
       <main className="jokes-main py-8">
         <div className="container mt-0 flex flex-wrap space-x-4 place-items-start text-gray-light">
           <div className="jokes-list max-w-12rem">
-            <Link to=".">Get a random ingredient</Link>
-            <p>Here are a few more ingredients to check out:</p>
+            <Link to="." className="hover:underline">Get a random ingredient</Link>
+            <p className="">Here are a few more ingredients to check out:</p>
             <ul>
               <li>
                 <Link to="some-joke-id" className="">Flour</Link>
