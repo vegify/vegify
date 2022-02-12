@@ -1,9 +1,28 @@
-import type { LinksFunction } from "remix";
-import { Outlet, Link } from "remix";
+import type { LinksFunction, LoaderFunction } from "remix";
+import { Link, Outlet, useLoaderData } from "remix";
+
+import { db } from "~/utils/db.server";
 
 import icon from "../img/VegifyIconWhite.svg";
 
+type LoaderData = {
+  ingredientListItems: Array<{ id: bigint; name: string }>;
+};
+
+export const loader: LoaderFunction = async () => {
+  const data: LoaderData = {
+    IngrdientListItems: await db.ingredient.findMany({
+      take: 5,
+      select: { id: true, name: true },
+      orderBy: { id: "asc" }      
+    })
+  };
+  return data;
+};
+
 export default function IngredientRoute() {
+  const data = useLoaderData<LoaderData>();
+
   return (
     <div className="jokes-layout container mx-auto flex flex-col">
       <header className="jokes-header py-4 border-gray-light border-solid border-b-2">
@@ -26,12 +45,14 @@ export default function IngredientRoute() {
       <main className="jokes-main py-8">
         <div className="container mt-0 flex flex-wrap space-x-4 place-items-start text-gray-light">
           <div className="jokes-list max-w-12rem">
-            <Link to="." className="hover:underline">Get a random ingredient</Link>
-            <p className="">Here are a few more ingredients to check out:</p>
-            <ul>
-              <li>
-                <Link to="some-joke-id" className="">Flour</Link>
-              </li>
+            <Link to="." className="text-yellow hover:underline">Get a random ingredient</Link>
+            <p className="py-4">Here are a few more ingredients to check out:</p>
+            <ul className="pb-4">
+              {data.IngrdientListItems.map(ingredient => (
+                <li key={ingredient.id}>
+                  <Link to={ingredient.id} className="text-yellow hover:underline">{ingredient.name} {ingredient.id}</Link>
+                </li>
+              ))}
             </ul>
             <Link to="new" className="button">
               Add your own

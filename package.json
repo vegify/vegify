@@ -26,6 +26,7 @@
     "@types/react-dom": "^17.0.9",
     "autoprefixer": "^10.4.2",
     "concurrently": "^7.0.0",
+    "esbuild-register": "^3.3.2",
     "postcss": "^8.4.6",
     "prisma": "^3.9.2",
     "tailwindcss": "^3.0.21",
@@ -34,5 +35,8 @@
   "engines": {
     "node": ">=14"
   },
+  "prisma": {
+    "seed": "node --require esbuild-register prisma/seed.ts"
+  },  
   "sideEffects": false
 }

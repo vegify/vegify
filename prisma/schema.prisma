@@ -32,14 +32,18 @@ model app_user {
   user_biometrics        user_biometrics?
   user_demographics      user_demographics[]
   user_nutrition_profile user_nutrition_profile[]
+
+  @@unique([username, email, id], map: "u_au")
 }
 
 model href {
   id                                       Int       @id(map: "href_pk") @default(autoincrement())
   url                                      String    @db.VarChar
-  desc                                     String    @db.VarChar
+  desc                                     String?   @db.VarChar
   product_hrefToproduct_amazon_link        product[] @relation("hrefToproduct_amazon_link")
   product_hrefToproduct_store_locator_link product[] @relation("hrefToproduct_store_locator_link")
+
+  @@unique([id, url], map: "u_h")
 }
 
 model img {
@@ -54,6 +58,8 @@ model img {
   product_img           product_img[]
   recipe_step_img       recipe_step_img[]
   review_img            review_img[]
+
+  @@unique([id, url], map: "u_img")
 }
 
 model img_tag {
@@ -68,7 +74,7 @@ model ingredient {
   id                                     Int                                  @id(map: "ingredient_pk") @default(autoincrement())
   name                                   String?                              @db.VarChar
   desc                                   String?                              @db.VarChar
-  is_vegan                               Boolean
+  is_vegan                               Boolean?
   serving_size                           Int?
   batch_size                             Int?
   amount_amountToingredient_batch_size   amount?                              @relation("amountToingredient_batch_size", fields: [batch_size], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "ingredient_batch_size")
@@ -80,6 +86,9 @@ model ingredient {
   ingredient_tag                         ingredient_tag[]
   product_ingredient_label               product_ingredient_label[]
   recipe                                 recipe[]
+
+  @@unique([name, id], map: "u_i")
+  @@index([name, id], map: "ingredient_idx_name")
 }
 
 model ingredient_img {
@@ -148,6 +157,8 @@ model nutrient {
   nutrient_amount                      nutrient_amount[]
   nutrient_img                         nutrient_img[]
   nutrition_profile_tracked_nutrient   nutrition_profile_tracked_nutrient[]
+
+  @@unique([id, name], map: "u_n")
 }
 
 model nutrient_amount {
@@ -169,11 +180,11 @@ model nutrient_img {
 
 model nutrition_profile {
   id                                 Int                                  @id(map: "nutrition_profile_pk") @default(autoincrement())
-  name                               String                               @db.VarChar
-  img_url                            String                               @db.VarChar
-  originator_name                    String                               @db.VarChar
-  originator_url                     String                               @db.VarChar
-  desc                               String                               @db.VarChar
+  name                               String?                              @db.VarChar
+  img_url                            String?                              @db.VarChar
+  originator_name                    String?                              @db.VarChar
+  originator_url                     String?                              @db.VarChar
+  desc                               String?                              @db.VarChar
   nutrition_profile_img              nutrition_profile_img[]
   nutrition_profile_tracked_nutrient nutrition_profile_tracked_nutrient[]
   user_nutrition_profile             user_nutrition_profile[]
@@ -260,6 +271,8 @@ model recipe {
   recipe_step          recipe_step[]
   recipe_tag           recipe_tag[]
   recipe_user          recipe_user[]
+
+  @@unique([id, as_ingredient_id], map: "u_r")
 }
 
 model recipe_review {
@@ -331,6 +344,8 @@ model tag {
   ingredient_tag ingredient_tag[]
   product_tag    product_tag[]
   recipe_tag     recipe_tag[]
+
+  @@unique([id, tag], map: "u_t")
 }
 
 model user_biometrics {
