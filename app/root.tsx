@@ -9,7 +9,7 @@ export const links: LinksFunction = () => {
 
 export default function App() {
   return (
-    <html lang="en">
+    <html lang="en" className="box-border">
       <head>
         <meta charSet="utf-8" />
         <title>Vegify | Micronutrition Tracker</title>
@@ -17,10 +17,9 @@ export default function App() {
       </head>
       <body 
         className="
-          bg-gray-light
+          bg-forest-green
           text-gray-dark
           flex
-          m-8
         ">
         <Outlet />
         {process.env.NODE_ENV === "development" ? (
