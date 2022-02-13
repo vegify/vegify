@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["browser-route-module:/Users/johncarmack/Coding/vegifyapp/vegify/app/routes/index.tsx?browser", "../../../app/routes/index.tsx"],
-  "sourcesContent": ["export { default } from \"/Users/johncarmack/Coding/vegifyapp/vegify/app/routes/index.tsx\";", "export default function IndexRoute() {\n    return <div>Hello Index Route</div>;\n  }"],
-  "mappings": ";;;;;;AAAA;;;ACAA;AAAe,sBAAsB;AACjC,SAAO,oCAAC,OAAD,MAAK;AAAA;",
-  "names": []
-}
