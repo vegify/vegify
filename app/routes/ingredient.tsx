@@ -50,7 +50,7 @@ export default function IngredientRoute() {
             <ul className="pb-4">
               {data.IngrdientListItems.map(ingredient => (
                 <li key={ingredient.id}>
-                  <Link to={ingredient.id} className="text-yellow hover:underline">{ingredient.name} {ingredient.id}</Link>
+                  <Link to={ingredient.id.toString()} className="text-yellow hover:underline">{ingredient.name}</Link>
                 </li>
               ))}
             </ul>
