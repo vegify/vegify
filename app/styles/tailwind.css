@@ -518,6 +518,18 @@ Ensure the default browser behavior of the `hidden` attribute.
   }
 }
 
+.sr-only{
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
 .m-auto{
   margin: auto;
 }
@@ -646,6 +658,11 @@ Ensure the default browser behavior of the `hidden` attribute.
   background-color: rgb(50 132 50 / var(--tw-bg-opacity));
 }
 
+.bg-gray-light{
+  --tw-bg-opacity: 1;
+  background-color: rgb(241 241 241 / var(--tw-bg-opacity));
+}
+
 .bg-gradient-radial{
   background-image: radial-gradient(var(--tw-gradient-stops));
 }
@@ -671,6 +688,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .p-0{
   padding: 0px;
+}
+
+.p-4{
+  padding: 1rem;
 }
 
 .py-3{
@@ -732,11 +753,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .text-2xl{
   font-size: 1.5rem;
   line-height: 2rem;
-}
-
-.text-7xl{
-  font-size: 4.5rem;
-  line-height: 1;
 }
 
 .leading-4{

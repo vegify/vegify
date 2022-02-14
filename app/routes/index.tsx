@@ -4,7 +4,7 @@ import logo from "../img/VegifyLogoOrigBGLight.svg";
 
 export default function Index() {
   return (
-    <div className="flex h-screen w-full mx-auto bg-gradient-radial from-green to-forest-green">
+    <div className="flex h-screen w-full mx-auto bg-gradient-radial-from-green-to-forest-green">
       <div className="m-auto py-3">
         <img src={logo} className="object-fill h-40 drop-shadow-2xl leading-4" alt="Vegify" />
         <nav  className="">

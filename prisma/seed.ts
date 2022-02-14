@@ -2,9 +2,19 @@ import { PrismaClient } from "@prisma/client";
 const db = new PrismaClient();
 
 async function seed() {
+  const john = await db.app_user.create({
+    data: {
+      username: "john",
+      // this is a hashed version of "twixrox"
+      pwd:
+        "$2b$10$K7L1OJ45/4Y2nIvhRVpCe.FSmhDdWoXehVzJptJ/op0lSsvqNu/1u",
+      email: "john@vegify.app"
+    }
+  });
   await Promise.all(
     getIngredients().map(ingredient => {
-      return db.ingredient.create({ data: ingredient });
+      const data = { creator_id: john.id, ...ingredient };
+      return db.ingredient.create({ data });
     })
   );
 }

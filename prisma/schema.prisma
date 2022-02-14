@@ -26,6 +26,7 @@ model app_user {
   email                  String                   @db.VarChar
   pwd                    String                   @db.VarChar
   img                    img?                     @relation(fields: [img_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "user_img")
+  ingredient             ingredient[]
   recipe                 recipe[]
   recipe_review          recipe_review[]
   recipe_user            recipe_user[]
@@ -72,12 +73,14 @@ model img_tag {
 
 model ingredient {
   id                                     Int                                  @id(map: "ingredient_pk") @default(autoincrement())
-  name                                   String?                              @db.VarChar
+  name                                   String?                              @unique(map: "u_i_n") @db.VarChar
   desc                                   String?                              @db.VarChar
   is_vegan                               Boolean?
   serving_size                           Int?
   batch_size                             Int?
+  creator_id                             Int
   amount_amountToingredient_batch_size   amount?                              @relation("amountToingredient_batch_size", fields: [batch_size], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "ingredient_batch_size")
+  app_user                               app_user                             @relation(fields: [creator_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "ingredient_app_user")
   amount_amountToingredient_serving_size amount?                              @relation("amountToingredient_serving_size", fields: [serving_size], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "ingredient_serving_size")
   ingredient_img                         ingredient_img[]
   ingredient_in_recipe                   ingredient_in_recipe[]
@@ -87,7 +90,6 @@ model ingredient {
   product_ingredient_label               product_ingredient_label[]
   recipe                                 recipe[]
 
-  @@unique([name, id], map: "u_i")
   @@index([name, id], map: "ingredient_idx_name")
 }
 
