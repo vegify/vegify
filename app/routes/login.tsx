@@ -4,10 +4,10 @@ import { Link, useSearchParams } from "remix";
 export default function Login() {
   const [searchParams] = useSearchParams();
   return (
-    <div className="container flex flex-col h-screen w-full mx-auto bg-gradient-radial-from-green-to-forest-green">
-      <div className="content flex flex-col m-auto p-4 bg-gray-light" data-light="">
-        <h1>Login</h1>
-        <form method="post">
+    <div className="container flex flex-col h-screen w-full mx-auto bg-gradient-radial from-green to-forest-green">
+      <div className="content flex flex-col w-[400px] max-w-full m-auto justify-center items-center rounded-md p-4 bg-gray-light" data-light="">
+        <h1 className="text-4xl font-serif mt-0 pt-4 pb-2">Login</h1>
+        <form method="post" className="flex flex-col gap-4 w-full">
           <input
             type="hidden"
             name="redirectTo"
@@ -15,11 +15,11 @@ export default function Login() {
               searchParams.get("redirectTo") ?? undefined
             }
           />
-          <fieldset>
-            <legend className="sr-only">
+          <fieldset className="flex justify-center m-0 p-0 b-0">
+            <legend className="sr-only mr-8 block max-w-full mb-1 whitespace-normal">
               Login or Register?
             </legend>
-            <label>
+            <label className="mr-8">
               <input
                 type="radio"
                 name="loginType"
@@ -28,7 +28,7 @@ export default function Login() {
               />{" "}
               Login
             </label>
-            <label>
+            <label className="">
               <input
                 type="radio"
                 name="loginType"
@@ -53,7 +53,7 @@ export default function Login() {
               type="password"
             />
           </div>
-          <button type="submit" className="button">
+          <button type="submit" className="button px-5 py-3 text-gray-light rounded bg-forest-green">
             Submit
           </button>
         </form>
