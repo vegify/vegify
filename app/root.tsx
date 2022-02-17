@@ -19,7 +19,6 @@ export default function App() {
         className="
           bg-forest-green
           text-gray-dark
-          flex
         ">
         <Outlet />
         {process.env.NODE_ENV === "development" ? (
