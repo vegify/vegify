@@ -6,7 +6,7 @@ async function seed() {
     data: {
       username: "john",
       // this is a hashed version of "twixrox"
-      pwd:
+      password:
         "$2b$10$K7L1OJ45/4Y2nIvhRVpCe.FSmhDdWoXehVzJptJ/op0lSsvqNu/1u",
       email: "john@vegify.app"
     }

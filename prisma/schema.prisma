@@ -19,12 +19,12 @@ model amount {
 
 model app_user {
   id                     Int                      @id(map: "id") @default(autoincrement())
-  username               String                   @db.VarChar
+  username               String                   @unique(map: "username") @db.VarChar
   img_id                 Int?
   bio                    String?                  @db.VarChar
   website                String?                  @db.VarChar
-  email                  String                   @db.VarChar
-  pwd                    String                   @db.VarChar
+  email                  String?                  @unique(map: "email") @db.VarChar
+  password               String                   @db.VarChar
   img                    img?                     @relation(fields: [img_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "user_img")
   ingredient             ingredient[]
   recipe                 recipe[]
@@ -33,8 +33,6 @@ model app_user {
   user_biometrics        user_biometrics?
   user_demographics      user_demographics[]
   user_nutrition_profile user_nutrition_profile[]
-
-  @@unique([username, email, id], map: "u_au")
 }
 
 model href {

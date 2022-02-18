@@ -1,5 +1,5 @@
 -- Created by Vertabelo (http://vertabelo.com)
--- Last modification date: 2022-02-14 18:50:48.912
+-- Last modification date: 2022-02-18 01:11:21.382
 
 CREATE EXTENSION IF NOT EXISTS pgcrypto;;
 
@@ -20,9 +20,11 @@ CREATE TABLE app_user (
     img_id int  NULL,
     bio varchar  NULL,
     website varchar  NULL,
-    email varchar  NOT NULL,
-    pwd varchar  NOT NULL,
-    CONSTRAINT u_au UNIQUE (username, email, id) NOT DEFERRABLE  INITIALLY IMMEDIATE,
+    email varchar  NULL,
+    password varchar  NOT NULL,
+    CONSTRAINT username UNIQUE (username) NOT DEFERRABLE  INITIALLY IMMEDIATE,
+    CONSTRAINT id UNIQUE (id) NOT DEFERRABLE  INITIALLY IMMEDIATE,
+    CONSTRAINT email UNIQUE (email) NOT DEFERRABLE  INITIALLY IMMEDIATE,
     CONSTRAINT id PRIMARY KEY (id)
 );
 
