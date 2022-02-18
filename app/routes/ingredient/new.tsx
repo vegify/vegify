@@ -2,6 +2,7 @@ import type { ActionFunction } from "remix";
 import { useActionData, redirect, json } from "remix";
 
 import { db } from "~/utils/db.server";
+import { requireUserId } from "~/utils/session.server";
 
 function validateIngredientDesc(desc: string) {
   if (desc.length < 10) {
@@ -33,6 +34,7 @@ const badRequest = (data: ActionData) =>
 export const action: ActionFunction = async ({
   request
 }) => {
+  const userId = await requireUserId(request);
   const form = await request.formData();
   const name = form.get("name");
   const desc = form.get("desc");
@@ -56,7 +58,9 @@ export const action: ActionFunction = async ({
     return badRequest({ fieldErrors, fields });
   }
 
-  const ingredient = await db.ingredient.create({ data: fields });
+  const ingredient = await db.ingredient.create({ 
+    data: { ...fields, userId: userId}
+});
   return redirect(`/ingredient/${ingredient.id}`);
 };
 

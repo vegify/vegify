@@ -7,7 +7,10 @@ import {
 } from "remix";
 
 import { db } from "~/utils/db.server";
-import { login } from "~/utils/session.server";
+import {
+  createUserSession,
+  login
+} from "~/utils/session.server";
 
 function validateUsername(username: unknown) {
   if (typeof username !== "string" || username.length < 3) {
@@ -67,18 +70,14 @@ export const action: ActionFunction = async ({
   switch (loginType) {
     case "login": {
       const user = await login({ username, password });
-      console.log({ user });
+
       if (!user) {
         return badRequest({
           fields,
           formError: `Username/Password combination is incorrect`
         });
       }
-      // if there is a user, create their session and redirect to /ß
-      return badRequest({
-        fields,
-        formError: "Not implemented"
-      });
+      return createUserSession(user.id, redirectTo);
     }
     case "register": {
       const userExists = await db.app_user.findFirst({
