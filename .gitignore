@@ -1,11 +1,14 @@
-node_modules
-/.cache
-/build
-/public/build
-/app/tailwind.css
-# /devscripts
+/node_modules
+/public/hot
+/public/storage
+/storage/*.key
+/vendor
 .env
-
-JOHN_TODOS.md
-README deploy.md
-.DS_Store
+.env.backup
+.phpunit.result.cache
+Homestead.json
+Homestead.yaml
+npm-debug.log
+yarn-error.log
+/.idea
+/.vscode
