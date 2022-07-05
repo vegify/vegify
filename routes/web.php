@@ -3,6 +3,7 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Http\Controllers\IngredientController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,6 +27,33 @@ Route::get('/', function () {
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+})
+    ->middleware(['auth', 'verified'])
+    ->name('dashboard');
 
-require __DIR__.'/auth.php';
+Route::get('/ingredient', [IngredientController::class, 'index'])
+    ->middleware(['auth', 'verified'])
+    ->name('ingredient');
+
+Route::get('/ingredient/new', [IngredientController::class, 'create'])
+    ->middleware(['auth', 'verified'])
+    ->name('ingredient.create');
+
+Route::get('/ingredient/{ingredient}', [IngredientController::class, 'show'])
+    ->middleware(['auth', 'verified'])
+    ->name('ingredient.show');
+
+Route::get('/ingredient/{ingredient}/edit', [
+    IngredientController::class,
+    'edit',
+])
+    ->middleware(['auth', 'verified'])
+    ->name('ingredient.edit');
+
+Route::get('/recipe', function () {
+    return Inertia::render('Recipe');
+})
+    ->middleware(['auth', 'verified'])
+    ->name('recipe');
+
+require __DIR__ . '/auth.php';

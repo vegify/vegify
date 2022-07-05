@@ -17,7 +17,9 @@ class AmountFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'unit' => fake()->word(),
+            'amount' => fake()->randomFloat(6, 9999999999990, 9999999999999),
+            'grams' => fake()->randomFloat(6, 0.000001, 0.000009),
         ];
     }
 }

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreIngredientRequest;
 use App\Http\Requests\UpdateIngredientRequest;
 use App\Models\Ingredient;
+use Inertia\Inertia;
+use Illuminate\Support\Facades\URL;
 
 class IngredientController extends Controller
 {
@@ -15,7 +17,21 @@ class IngredientController extends Controller
      */
     public function index()
     {
-        //
+        return Inertia::render('Ingredient', [
+            'ingredients' => Ingredient::all()->map(function ($ingredient) {
+                return [
+                    'id' => $ingredient->id,
+                    'name' => $ingredient->name,
+                    'description' => $ingredient->description,
+                    'is_vegan' => $ingredient->is_vegan,
+                    'serving_size' => $ingredient->serving_size,
+                    'batch_size' => $ingredient->batch_size,
+                    'show_url' => URL::route('ingredient.show', $ingredient),
+                    'edit_url' => URL::route('ingredient.edit', $ingredient),
+                ];
+            }),
+            'create_url' => URL::route('ingredient.create'),
+        ]);
     }
 
     /**
@@ -47,7 +63,16 @@ class IngredientController extends Controller
      */
     public function show(Ingredient $ingredient)
     {
-        //
+        return inertia('Ingredient', [
+            'ingredient' => $ingredient->only(
+                'id',
+                'name',
+                'description',
+                'is_vegan',
+                'serving_size',
+                'batch_size',
+            ),
+        ]);
     }
 
     /**
@@ -68,8 +93,10 @@ class IngredientController extends Controller
      * @param  \App\Models\Ingredient  $ingredient
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateIngredientRequest $request, Ingredient $ingredient)
-    {
+    public function update(
+        UpdateIngredientRequest $request,
+        Ingredient $ingredient,
+    ) {
         //
     }
 

@@ -2,13 +2,15 @@
     "private": true,
     "scripts": {
         "dev": "vite",
-        "build": "vite build && vite build --ssr"
+        "build": "vite build && vite build --ssr",
+        "prettier": "prettier"
     },
     "devDependencies": {
         "@inertiajs/inertia": "^0.11.0",
         "@inertiajs/inertia-vue3": "^0.6.0",
         "@inertiajs/progress": "^0.2.7",
         "@inertiajs/server": "^0.1.0",
+        "@prettier/plugin-php": "^0.18.9",
         "@tailwindcss/forms": "^0.5.2",
         "@tailwindcss/typography": "^0.5.2",
         "@vitejs/plugin-vue": "^2.3.3",
@@ -18,6 +20,7 @@
         "laravel-vite-plugin": "^0.2.1",
         "lodash": "^4.17.19",
         "postcss": "^8.4.6",
+        "prettier": "^2.7.1",
         "tailwindcss": "^3.1.0",
         "vite": "^2.9.11",
         "vitest": "^0.17.0",
