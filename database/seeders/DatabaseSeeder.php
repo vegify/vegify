@@ -20,17 +20,27 @@ class DatabaseSeeder extends Seeder
             'password' =>
                 '$2y$10$pgbwlN546iwatij2Q5RmKuNgUaixpz3oDGvE1ZN.HeEBqfOoeL6VK',
         ]);
-        \App\Models\Ingredient::factory()->create([
-            'name' => 'Caputo 00 Flour',
-            'description' =>
-                'Professional flour; this 100% wheat flour is a culinary essential, perfect for long fermentation baking. Originating in Italy, our family company is dedicated to the gold standard of Neapolitan pizza flour established since 1924',
-            'is_vegan' => true,
+        \App\Models\Amount::factory()->create([
+            'unit' => 'cup',
+            'amount' => 0.25,
+            'grams' => 30,
         ]);
         \App\Models\Amount::factory()->create([
             'unit' => 'cup',
             'amount' => 0.25,
             'grams' => 30,
         ]);
+        \App\Models\Ingredient::factory()->create([
+            'name' => 'Caputo 00 Flour',
+            'description' =>
+                'Professional flour; this 100% wheat flour is a culinary essential, perfect for long fermentation baking. Originating in Italy, our family company is dedicated to the gold standard of Neapolitan pizza flour established since 1924',
+            'is_vegan' => true,
+            'batch_size' => 1,
+            'serving_size' => 1,
+        ]);
+        \App\Models\Amount::factory()
+            ->count(4)
+            ->create();
         \App\Models\Ingredient::factory()->create([
             'name' => 'Water',
             'description' =>
@@ -62,9 +72,6 @@ class DatabaseSeeder extends Seeder
             ->count(1)
             ->create();
         \App\Models\Recipe::factory()
-            ->count(4)
-            ->create();
-        \App\Models\Amount::factory()
             ->count(4)
             ->create();
     }
