@@ -17,17 +17,15 @@ class IngredientController extends Controller
      */
     public function index()
     {
-        return Inertia::render('Ingredient', [
+        return Inertia::render('Ingredient/Index', [
             'ingredients' => Ingredient::all()->map(function ($ingredient) {
                 return [
                     'id' => $ingredient->id,
                     'name' => $ingredient->name,
                     'description' => $ingredient->description,
                     'is_vegan' => $ingredient->is_vegan,
-                    'serving_size' => $ingredient->serving_size,
-                    'batch_size' => $ingredient->batch_size,
-                    'show_url' => URL::route('ingredient.show', $ingredient),
-                    'edit_url' => URL::route('ingredient.edit', $ingredient),
+                    'serving_size' => $ingredient->serving_size()->first(),
+                    'batch_size' => $ingredient->batch_size()->first(),
                 ];
             }),
             'create_url' => URL::route('ingredient.create'),
@@ -63,15 +61,15 @@ class IngredientController extends Controller
      */
     public function show(Ingredient $ingredient)
     {
-        return inertia('Ingredient', [
-            'ingredient' => $ingredient->only(
-                'id',
-                'name',
-                'description',
-                'is_vegan',
-                'serving_size',
-                'batch_size',
-            ),
+        return inertia('Ingredient/Show', [
+            'ingredient' => [
+                'id' => $ingredient->id,
+                'name' => $ingredient->name,
+                'description' => $ingredient->description,
+                'is_vegan' => $ingredient->is_vegan,
+                'serving_size' => $ingredient->serving_size()->first(),
+                'batch_size' => $ingredient->batch_size()->first(),
+            ],
         ]);
     }
 
@@ -83,7 +81,6 @@ class IngredientController extends Controller
      */
     public function edit(Ingredient $ingredient)
     {
-        //
     }
 
     /**

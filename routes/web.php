@@ -31,9 +31,13 @@ Route::get('/dashboard', function () {
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
 
-Route::get('/ingredient', [IngredientController::class, 'index'])
-    ->middleware(['auth', 'verified'])
-    ->name('ingredient');
+Route::get('/ingredients', [IngredientController::class, 'index'])
+    // ->middleware(['auth', 'verified'])
+    ->name('ingredients');
+
+Route::get('/ingredient', function () {
+    return redirect('/ingredients');
+});
 
 Route::get('/ingredient/new', [IngredientController::class, 'create'])
     ->middleware(['auth', 'verified'])
@@ -42,13 +46,6 @@ Route::get('/ingredient/new', [IngredientController::class, 'create'])
 Route::get('/ingredient/{ingredient}', [IngredientController::class, 'show'])
     ->middleware(['auth', 'verified'])
     ->name('ingredient.show');
-
-Route::get('/ingredient/{ingredient}/edit', [
-    IngredientController::class,
-    'edit',
-])
-    ->middleware(['auth', 'verified'])
-    ->name('ingredient.edit');
 
 Route::get('/recipe', function () {
     return Inertia::render('Recipe');

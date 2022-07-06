@@ -21,14 +21,6 @@ return new class extends Migration {
             $table->bigInteger('batch_size')->nullable();
             $table->timestamps();
         });
-
-        // Schema::table('recipes', function(Blueprint $table) {
-        //     $table->bigInteger('serving_size')->unsigned()->index()->change();
-        //     $table->foreign('serving_size')->references('id')->on('amounts')->onDelete('cascade');
-
-        //     $table->bigInteger('batch_size')->unsigned()->index()->change();
-        //     $table->foreign('batch_size')->references('id')->on('amounts')->onDelete('cascade');
-        // });
     }
 
     /**

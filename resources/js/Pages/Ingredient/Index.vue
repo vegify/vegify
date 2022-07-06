@@ -1,6 +1,6 @@
 <script setup>
 import BreezeAuthenticatedLayout from '@/Layouts/Authenticated.vue';
-import { Head } from '@inertiajs/inertia-vue3';
+import { Head, Link } from '@inertiajs/inertia-vue3';
 
 defineProps(['ingredients', 'ingredient']);
 </script>
@@ -13,7 +13,7 @@ defineProps(['ingredients', 'ingredient']);
             <h2
                 class="font-semibold text-xl text-gray-800 dark:text-white leading-tight"
             >
-                Ingredient
+                Ingredients
             </h2>
         </template>
 
@@ -24,35 +24,33 @@ defineProps(['ingredients', 'ingredient']);
                 >
                     <div
                         class="p-6 bg-white dark:bg-gray-700 border-b border-gray-200 dark:border-gray-900"
-                    >
-                        {{ ingredient || 'Ingredients' }}
-                    </div>
-                    <div
-                        class="p-6 bg-white dark:bg-gray-700 border-b border-gray-200 dark:border-gray-900"
                         v-for="ingredient in ingredients"
                         :key="ingredient.id"
                     >
                         <div>
-                            <a
-                                :href="ingredient.show_url"
+                            <Link
+                                :href="route('ingredient.show', ingredient)"
                                 class="hover:underline text:indigo-700 dark:text-indigo-50"
-                                >{{ ingredient.name }}</a
                             >
-                            |
-                            <a
-                                :href="ingredient.edit_url"
-                                class="hover:underline text:indigo-700 dark:text-indigo-50"
-                                >edit</a
-                            >
+                                {{ ingredient.name }}
+                            </Link>
                         </div>
                         <div>{{ ingredient.description }}</div>
                         <div>
                             {{ ingredient.is_vegan ? 'Vegan!' : 'Not vegan!' }}
                         </div>
-                        <div>{{ ingredient.serving_size }}</div>
-                        <div>{{ ingredient.batch_size }}</div>
-                        <div></div>
-                        <div></div>
+                        <div>
+                            Serving size:
+                            {{
+                                `${ingredient.serving_size.amount} ${ingredient.serving_size.unit} (${ingredient.serving_size.grams} grams)`
+                            }}
+                        </div>
+                        <div>
+                            Batch size:
+                            {{
+                                `${ingredient.batch_size.amount} ${ingredient.batch_size.unit} (${ingredient.batch_size.grams} grams)`
+                            }}
+                        </div>
                     </div>
                 </div>
             </div>
