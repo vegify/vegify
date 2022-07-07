@@ -3,7 +3,6 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
-use App\Http\Controllers\IngredientController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,7 +22,7 @@ Route::get('/', function () {
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
     ]);
-});
+})->name('home');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
@@ -31,26 +30,12 @@ Route::get('/dashboard', function () {
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
 
-Route::get('/ingredients', [IngredientController::class, 'index'])
-    // ->middleware(['auth', 'verified'])
-    ->name('ingredients');
-
-Route::get('/ingredient', function () {
-    return redirect('/ingredients');
-});
-
-Route::get('/ingredient/new', [IngredientController::class, 'create'])
-    ->middleware(['auth', 'verified'])
-    ->name('ingredient.create');
-
-Route::get('/ingredient/{ingredient}', [IngredientController::class, 'show'])
-    ->middleware(['auth', 'verified'])
-    ->name('ingredient.show');
-
 Route::get('/recipe', function () {
     return Inertia::render('Recipe');
 })
     ->middleware(['auth', 'verified'])
     ->name('recipe');
 
+require __DIR__ . '/ingredients.php';
+require __DIR__ . '/recipes.php';
 require __DIR__ . '/auth.php';

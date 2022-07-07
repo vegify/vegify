@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreRecipeRequest;
 use App\Http\Requests\UpdateRecipeRequest;
 use App\Models\Recipe;
+use Inertia\Inertia;
+use Illuminate\Support\Facades\URL;
 
 class RecipeController extends Controller
 {
@@ -15,7 +17,26 @@ class RecipeController extends Controller
      */
     public function index()
     {
-        //
+        return Inertia::render('Recipe/Index', [
+            'recipes' => Recipe::all()->map(function ($recipe) {
+                $as_ingredient = $recipe->as_ingredient()->first();
+                return [
+                    'id' => $recipe->id,
+                    'as_ingredient_id' => $recipe->as_ingredient_id,
+                    'name' => $as_ingredient->name,
+                    'description' => $as_ingredient->description,
+                    'is_vegan' => $as_ingredient->is_vegan,
+                    'serving_size' => $as_ingredient->serving_size()->first(),
+                    'batch_size' => $as_ingredient->batch_size()->first(),
+                    'creator' => $recipe->creator()->first(),
+                    'subtitle' => $recipe->subtitle,
+                    'prep_minutes' => $recipe->prep_minutes,
+                    'cook_minutes' => $recipe->cook_minutes,
+                    'total_time' => $recipe->total_time,
+                    'video_id' => $recipe->video_id,
+                ];
+            }),
+        ]);
     }
 
     /**
@@ -47,7 +68,25 @@ class RecipeController extends Controller
      */
     public function show(Recipe $recipe)
     {
-        //
+        $as_ingredient = $recipe->as_ingredient()->first();
+
+        return inertia('Recipe/Show', [
+            'recipe' => [
+                'id' => $recipe->id,
+                'as_ingredient_id' => $recipe->as_ingredient_id,
+                'name' => $as_ingredient->name,
+                'description' => $as_ingredient->description,
+                'is_vegan' => $as_ingredient->is_vegan,
+                'serving_size' => $as_ingredient->serving_size()->first(),
+                'batch_size' => $as_ingredient->batch_size()->first(),
+                'creator' => $recipe->creator()->first(),
+                'subtitle' => $recipe->subtitle,
+                'prep_minutes' => $recipe->prep_minutes,
+                'cook_minutes' => $recipe->cook_minutes,
+                'total_time' => $recipe->total_time,
+                'video_id' => $recipe->video_id,
+            ],
+        ]);
     }
 
     /**

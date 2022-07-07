@@ -3,20 +3,19 @@ import BreezeAuthenticatedLayout from '@/Layouts/Authenticated.vue';
 import { Head, Link } from '@inertiajs/inertia-vue3';
 
 defineProps({
-    ingredient: Object,
+    recipes: Object,
 });
 </script>
 
 <template>
-    <Head :title="`${ingredient.name} | Vegify`" />
+    <Head title="Recipe" />
 
     <BreezeAuthenticatedLayout>
         <template #header>
             <h2
                 class="font-semibold text-xl text-gray-800 dark:text-white leading-tight"
             >
-                <Link :href="route('ingredients')">Ingredients</Link> >>
-                {{ ingredient.name }}
+                Recipes
             </h2>
         </template>
 
@@ -27,21 +26,37 @@ defineProps({
                 >
                     <div
                         class="p-6 bg-white dark:bg-gray-700 border-b border-gray-200 dark:border-gray-900"
+                        v-for="recipe in recipes"
+                        :key="recipe.id"
                     >
-                        <div>{{ ingredient.description }}</div>
                         <div>
-                            {{ ingredient.is_vegan ? 'Vegan!' : 'Not vegan!' }}
+                            <Link
+                                :href="route('recipe.show', recipe)"
+                                class="hover:underline text:indigo-700 dark:text-indigo-50"
+                            >
+                                {{ recipe.name }}
+                            </Link>
+                            <div>{{ recipe.subtitle }}</div>
+                            by @{{ recipe.creator.name }}
                         </div>
+                        <div class="mt-4 leading-6 mb-6">
+                            {{ recipe.description }}
+                        </div>
+                        <ul>
+                            <li>Prep Minutes: {{ recipe.prep_minutes }}</li>
+                            <li>Cook Minutes: {{ recipe.cook_minutes }}</li>
+                            <li>Total Time: {{ recipe.total_time }}</li>
+                        </ul>
                         <div>
                             Serving Size:
                             {{
-                                `${ingredient.serving_size.amount} ${ingredient.serving_size.unit} (${ingredient.serving_size.grams} grams)`
+                                `${recipe.serving_size.amount} ${recipe.serving_size.unit} (${recipe.serving_size.grams} grams)`
                             }}
                         </div>
                         <div>
                             Batch Size:
                             {{
-                                `${ingredient.batch_size.amount} ${ingredient.batch_size.unit} (${ingredient.batch_size.grams} grams)`
+                                `${recipe.batch_size.amount} ${recipe.batch_size.unit} (${recipe.batch_size.grams} grams)`
                             }}
                         </div>
                     </div>

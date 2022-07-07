@@ -30,7 +30,7 @@ const Icon = computed(() =>
                         <div class="flex">
                             <!-- Logo -->
                             <div class="shrink-0 flex items-center">
-                                <Link :href="route('ingredients')">
+                                <Link :href="route('home')">
                                     <Icon class="block h-9 w-auto" />
                                 </Link>
                             </div>
@@ -56,6 +56,15 @@ const Icon = computed(() =>
                                     "
                                 >
                                     Ingredients
+                                </BreezeNavLink>
+                                <BreezeNavLink
+                                    class="dark:text-white"
+                                    :href="route('recipes')"
+                                    :active="
+                                        route().current().startsWith('recipe')
+                                    "
+                                >
+                                    Recipes
                                 </BreezeNavLink>
                             </div>
                         </div>
@@ -166,6 +175,14 @@ const Icon = computed(() =>
                             :active="route().current('ingredients')"
                         >
                             Ingredient
+                        </BreezeResponsiveNavLink>
+                    </div>
+                    <div class="pt-2 pb-3 space-y-1">
+                        <BreezeResponsiveNavLink
+                            :href="route('recipes')"
+                            :active="route().current('recipes')"
+                        >
+                            Recipe
                         </BreezeResponsiveNavLink>
                     </div>
 

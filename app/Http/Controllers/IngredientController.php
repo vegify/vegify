@@ -28,7 +28,6 @@ class IngredientController extends Controller
                     'batch_size' => $ingredient->batch_size()->first(),
                 ];
             }),
-            'create_url' => URL::route('ingredient.create'),
         ]);
     }
 

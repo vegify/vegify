@@ -20,7 +20,7 @@ class RecipeFactory extends Factory
             new \FakerRestaurant\Provider\en_US\Restaurant(fake()),
         );
         return [
-            'as_ingredient_id' => fake()->numberBetween(1, 5),
+            'as_ingredient_id' => fake()->numberBetween(1, 15),
             'creator_id' => fake()->numberBetween(1, 5),
             'subtitle' =>
                 'with ' . fake()->fruitName() . ' ' . fake()->sauceName(),

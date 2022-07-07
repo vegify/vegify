@@ -2,7 +2,9 @@
 import BreezeAuthenticatedLayout from '@/Layouts/Authenticated.vue';
 import { Head, Link } from '@inertiajs/inertia-vue3';
 
-defineProps(['ingredients', 'ingredient']);
+defineProps({
+    ingredients: Object,
+});
 </script>
 
 <template>

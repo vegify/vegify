@@ -15,7 +15,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         \App\Models\User::factory()->create([
-            'name' => 'John',
+            'name' => 'john',
             'email' => 'john@vegify.app',
             'password' =>
                 '$2y$10$pgbwlN546iwatij2Q5RmKuNgUaixpz3oDGvE1ZN.HeEBqfOoeL6VK',
@@ -59,8 +59,14 @@ class DatabaseSeeder extends Seeder
                 'Widely used by professionals, SAF is the #1-selling yeast worldwide. Use in any recipe calling for active dry yeast: artisan loaves, pizza, sandwich bread, bagels, rolls, and more. No need to adjust the amount, use just as the recipe says.',
             'is_vegan' => true,
         ]);
+        \App\Models\Ingredient::factory()->create([
+            'name' => 'Biga',
+            'description' =>
+                "Biga is a type of pre-fermentation used in Italian baking. Many popular Italian breads, including ciabatta, are made using a biga. Using a biga adds complexity to the bread's flavor and is often used in breads that need a light, open texture with holes.",
+            'is_vegan' => true,
+        ]);
         \App\Models\Recipe::factory()->create([
-            'as_ingredient_id' => 1,
+            'as_ingredient_id' => 5,
             'creator_id' => 1,
             'subtitle' => 'this is gonna be biga',
         ]);
@@ -69,7 +75,7 @@ class DatabaseSeeder extends Seeder
             ->count(4)
             ->create();
         \App\Models\Ingredient::factory()
-            ->count(1)
+            ->count(11)
             ->create();
         \App\Models\Recipe::factory()
             ->count(4)
