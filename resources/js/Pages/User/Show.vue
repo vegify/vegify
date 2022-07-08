@@ -29,7 +29,12 @@ defineProps({
                         class="p-6 bg-white dark:bg-gray-700 border-b border-gray-200 dark:border-gray-900"
                     >
                         <div>@{{ user.name }}</div>
-                        <div v-for="recipe in user.recipes" :key="recipe.id">
+                        <div class="my-2 font-bold">Recipes:</div>
+                        <div
+                            v-for="recipe in user.recipes"
+                            :key="recipe.id"
+                            class="my-2 border-t-gray-50 border-t-2"
+                        >
                             <div>
                                 <a :href="route('recipe.show', recipe.id)">{{
                                     recipe.as_ingredient.name
