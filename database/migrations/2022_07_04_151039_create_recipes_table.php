@@ -15,7 +15,7 @@ return new class extends Migration {
         Schema::create('recipes', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('as_ingredient_id')->nullable();
-            $table->bigInteger('creator_id')->nullable();
+            $table->bigInteger('user_id')->nullable();
             $table->string('subtitle')->nullable();
             $table->decimal('prep_minutes')->nullable();
             $table->decimal('cook_minutes')->nullable();

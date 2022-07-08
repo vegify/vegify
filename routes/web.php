@@ -38,4 +38,5 @@ Route::get('/recipe', function () {
 
 require __DIR__ . '/ingredients.php';
 require __DIR__ . '/recipes.php';
+require __DIR__ . '/users.php';
 require __DIR__ . '/auth.php';

@@ -10,6 +10,13 @@ class Ingredient extends Model
     use HasFactory;
 
     /**
+     * The relationships that should always be loaded.
+     *
+     * @var array
+     */
+    protected $with = ['serving_size', 'batch_size'];
+
+    /**
      * Get the serving size associated with the ingredient.
      */
     public function serving_size()

@@ -34,10 +34,16 @@ defineProps({
                                 :href="route('recipe.show', recipe)"
                                 class="hover:underline text:indigo-700 dark:text-indigo-50"
                             >
-                                {{ recipe.name }}
+                                {{ recipe.as_ingredient.name }}
                             </Link>
                             <div>{{ recipe.subtitle }}</div>
-                            by @{{ recipe.creator.name }}
+                            by
+                            <Link
+                                :href="route('user.show', recipe.creator)"
+                                class="hover:underline text:indigo-700 dark:text-indigo-50"
+                            >
+                                @{{ recipe.creator.name }}
+                            </Link>
                         </div>
                         <div class="mt-4 leading-6 mb-6">
                             {{ recipe.description }}
@@ -50,13 +56,13 @@ defineProps({
                         <div>
                             Serving Size:
                             {{
-                                `${recipe.serving_size.amount} ${recipe.serving_size.unit} (${recipe.serving_size.grams} grams)`
+                                `${recipe.as_ingredient.serving_size.amount} ${recipe.as_ingredient.serving_size.unit} (${recipe.as_ingredient.serving_size.grams} grams)`
                             }}
                         </div>
                         <div>
                             Batch Size:
                             {{
-                                `${recipe.batch_size.amount} ${recipe.batch_size.unit} (${recipe.batch_size.grams} grams)`
+                                `${recipe.as_ingredient.batch_size.amount} ${recipe.as_ingredient.batch_size.unit} (${recipe.as_ingredient.batch_size.grams} grams)`
                             }}
                         </div>
                     </div>

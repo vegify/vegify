@@ -19,14 +19,7 @@ class IngredientController extends Controller
     {
         return Inertia::render('Ingredient/Index', [
             'ingredients' => Ingredient::all()->map(function ($ingredient) {
-                return [
-                    'id' => $ingredient->id,
-                    'name' => $ingredient->name,
-                    'description' => $ingredient->description,
-                    'is_vegan' => $ingredient->is_vegan,
-                    'serving_size' => $ingredient->serving_size()->first(),
-                    'batch_size' => $ingredient->batch_size()->first(),
-                ];
+                return $ingredient;
             }),
         ]);
     }
@@ -61,14 +54,7 @@ class IngredientController extends Controller
     public function show(Ingredient $ingredient)
     {
         return inertia('Ingredient/Show', [
-            'ingredient' => [
-                'id' => $ingredient->id,
-                'name' => $ingredient->name,
-                'description' => $ingredient->description,
-                'is_vegan' => $ingredient->is_vegan,
-                'serving_size' => $ingredient->serving_size()->first(),
-                'batch_size' => $ingredient->batch_size()->first(),
-            ],
+            'ingredient' => $ingredient,
         ]);
     }
 

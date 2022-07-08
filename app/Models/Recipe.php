@@ -9,13 +9,20 @@ class Recipe extends Model
 {
     use HasFactory;
 
+    /**
+     * The relationships that should always be loaded.
+     *
+     * @var array
+     */
+    protected $with = ['as_ingredient'];
+
     public function as_ingredient()
     {
-        return $this->hasOne(Ingredient::class, 'id', 'as_ingredient_id');
+        return $this->belongsTo(Ingredient::class, 'as_ingredient_id');
     }
 
     public function creator()
     {
-        return $this->hasOne(User::class, 'id', 'creator_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

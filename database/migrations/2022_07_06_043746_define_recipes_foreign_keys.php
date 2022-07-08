@@ -25,12 +25,12 @@ return new class extends Migration {
                 ->onDelete('cascade');
 
             $table
-                ->bigInteger('creator_id')
+                ->bigInteger('user_id')
                 ->unsigned()
                 ->index()
                 ->change();
             $table
-                ->foreign('creator_id')
+                ->foreign('user_id')
                 ->references('id')
                 ->on('users');
 
@@ -66,12 +66,12 @@ return new class extends Migration {
                 ->onDelete('cascade');
 
             $table
-                ->foreign('creator_id')
+                ->foreign('user_id')
                 ->unsigned()
                 ->index()
                 ->change();
             $table
-                ->bigInteger('creator_id')
+                ->bigInteger('user_id')
                 ->references('id')
                 ->on('amounts')
                 ->onDelete('cascade');

@@ -14,7 +14,7 @@ defineProps(['recipe']);
                 class="font-semibold text-xl text-gray-800 dark:text-white leading-tight"
             >
                 <Link :href="route('recipes')">Recipes</Link> >>
-                {{ recipe.name }}
+                {{ recipe.as_ingredient.name }}
             </h2>
         </template>
 
@@ -26,20 +26,33 @@ defineProps(['recipe']);
                     <div
                         class="p-6 bg-white dark:bg-gray-700 border-b border-gray-200 dark:border-gray-900"
                     >
+                        <div>{{ recipe.as_ingredient.name }}</div>
+                        by
+                        <Link
+                            :href="route('user.show', recipe.creator)"
+                            class="hover:underline text:indigo-700 dark:text-indigo-50"
+                        >
+                            @{{ recipe.creator.name }}
+                        </Link>
+                        <div>{{ recipe.subtitle }}</div>
                         <div>{{ recipe.description }}</div>
                         <div>
-                            {{ recipe.is_vegan ? 'Vegan!' : 'Not vegan!' }}
+                            {{
+                                recipe.as_ingredient.is_vegan
+                                    ? 'Vegan!'
+                                    : 'Not vegan!'
+                            }}
                         </div>
                         <div>
                             Serving Size:
                             {{
-                                `${recipe.serving_size.amount} ${recipe.serving_size.unit} (${recipe.serving_size.grams} grams)`
+                                `${recipe.as_ingredient.serving_size.amount} ${recipe.as_ingredient.serving_size.unit} (${recipe.as_ingredient.serving_size.grams} grams)`
                             }}
                         </div>
                         <div>
                             Batch Size:
                             {{
-                                `${recipe.batch_size.amount} ${recipe.batch_size.unit} (${recipe.batch_size.grams} grams)`
+                                `${recipe.as_ingredient.batch_size.amount} ${recipe.as_ingredient.batch_size.unit} (${recipe.as_ingredient.batch_size.grams} grams)`
                             }}
                         </div>
                     </div>
