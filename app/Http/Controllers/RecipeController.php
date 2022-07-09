@@ -65,10 +65,13 @@ class RecipeController extends Controller
      */
     public function show(Recipe $recipe)
     {
-        $recipe->creator = $recipe->creator()->first();
+        $recipe->load('creator', 'ingredients');
+
+        // $flat = $recipe->first()->flatten();
 
         return inertia('Recipe/Show', [
             'recipe' => $recipe,
+            // 'flat' => $flat,
         ]);
     }
 

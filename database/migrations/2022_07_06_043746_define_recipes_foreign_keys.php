@@ -74,7 +74,7 @@ return new class extends Migration {
                 ->bigInteger('user_id')
                 ->references('id')
                 ->on('amounts')
-                ->onDelete('cascade');
+                ->onDelete('restrict');
 
             // $table
             //     ->foreign('video_id')

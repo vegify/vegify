@@ -2,7 +2,7 @@
 import BreezeAuthenticatedLayout from '@/Layouts/Authenticated.vue';
 import { Head, Link } from '@inertiajs/inertia-vue3';
 
-defineProps(['recipe']);
+defineProps(['recipe', 'flat']);
 </script>
 
 <template>
@@ -55,6 +55,15 @@ defineProps(['recipe']);
                                 `${recipe.as_ingredient.batch_size.amount} ${recipe.as_ingredient.batch_size.unit} (${recipe.as_ingredient.batch_size.grams} grams)`
                             }}
                         </div>
+                        <ul class="mt-5">
+                            <li
+                                v-for="ingredient in recipe.ingredients"
+                                :key="ingredient.id"
+                                class="mt-4"
+                            >
+                                {{ ingredient }}
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>

@@ -31,4 +31,17 @@ class Ingredient extends Model
     {
         return $this->hasOne(Amount::class, 'id', 'batch_size');
     }
+
+    /**
+     * Get the batch size associated with the ingredient.
+     */
+    public function recipes()
+    {
+        return $this->belongsToMany(
+            Recipe::class,
+            'ingredient_in_recipe',
+            'ingredient_id',
+            'recipe_id',
+        );
+    }
 }
