@@ -19,10 +19,7 @@ class DashBoardController extends Controller
     {
         return Inertia::render('Dashboard', [
             'users' => User::all()->map(function ($user) {
-                return [
-                    'id' => $user->id,
-                    'name' => $user->name,
-                ];
+                return $user->load('recipes');
             }),
         ]);
     }

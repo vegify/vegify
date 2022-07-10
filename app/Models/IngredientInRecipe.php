@@ -12,6 +12,8 @@ class IngredientInRecipe extends Pivot
 {
     use HasFactory;
 
+    protected $with = ['ingredient', 'amount'];
+
     public function recipe()
     {
         return $this->belongsTo(Recipe::class);

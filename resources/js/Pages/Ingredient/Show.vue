@@ -44,6 +44,15 @@ defineProps({
                                 `${ingredient.batch_size.amount} ${ingredient.batch_size.unit} (${ingredient.batch_size.grams} grams)`
                             }}
                         </div>
+                        <div>Used in:</div>
+                        <div
+                            v-for="recipe in ingredient.recipes"
+                            :key="recipe.id"
+                        >
+                            <Link :href="route('recipe.show', recipe.id)">{{
+                                recipe.as_ingredient.name
+                            }}</Link>
+                        </div>
                     </div>
                 </div>
             </div>

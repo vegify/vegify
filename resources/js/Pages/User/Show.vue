@@ -33,14 +33,14 @@ defineProps({
                         <div
                             v-for="recipe in user.recipes"
                             :key="recipe.id"
-                            class="my-2 border-t-gray-50 border-t-2"
+                            class="my-2 border-t-gray-50"
                         >
                             <div>
-                                <a :href="route('recipe.show', recipe.id)">{{
+                                <Link :href="route('recipe.show', recipe.id)">{{
                                     recipe.as_ingredient.name
-                                }}</a>
+                                }}</Link>
                             </div>
-                            <div>{{ recipe.description }}</div>
+                            <div>{{ recipe.as_ingredient.description }}</div>
                             <div>
                                 {{
                                     recipe.as_ingredient.is_vegan

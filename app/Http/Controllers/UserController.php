@@ -35,7 +35,7 @@ class UserController extends Controller
         $user->recipes = $user->recipes()->get();
 
         return inertia('User/Show', [
-            'user' => $user,
+            'user' => $user->load('recipes'),
         ]);
     }
 }

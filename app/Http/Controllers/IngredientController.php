@@ -24,26 +24,26 @@ class IngredientController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+    // /**
+    //  * Show the form for creating a new resource.
+    //  *
+    //  * @return \Illuminate\Http\Response
+    //  */
+    // public function create()
+    // {
+    //     //
+    // }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreIngredientRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreIngredientRequest $request)
-    {
-        //
-    }
+    // /**
+    //  * Store a newly created resource in storage.
+    //  *
+    //  * @param  \App\Http\Requests\StoreIngredientRequest  $request
+    //  * @return \Illuminate\Http\Response
+    //  */
+    // public function store(StoreIngredientRequest $request)
+    // {
+    //     //
+    // }
 
     /**
      * Display the specified resource.
@@ -54,42 +54,42 @@ class IngredientController extends Controller
     public function show(Ingredient $ingredient)
     {
         return inertia('Ingredient/Show', [
-            'ingredient' => $ingredient,
+            'ingredient' => $ingredient->load('recipes'),
         ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Ingredient  $ingredient
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Ingredient $ingredient)
-    {
-    }
+    // /**
+    //  * Show the form for editing the specified resource.
+    //  *
+    //  * @param  \App\Models\Ingredient  $ingredient
+    //  * @return \Illuminate\Http\Response
+    //  */
+    // public function edit(Ingredient $ingredient)
+    // {
+    // }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateIngredientRequest  $request
-     * @param  \App\Models\Ingredient  $ingredient
-     * @return \Illuminate\Http\Response
-     */
-    public function update(
-        UpdateIngredientRequest $request,
-        Ingredient $ingredient,
-    ) {
-        //
-    }
+    // /**
+    //  * Update the specified resource in storage.
+    //  *
+    //  * @param  \App\Http\Requests\UpdateIngredientRequest  $request
+    //  * @param  \App\Models\Ingredient  $ingredient
+    //  * @return \Illuminate\Http\Response
+    //  */
+    // public function update(
+    //     UpdateIngredientRequest $request,
+    //     Ingredient $ingredient,
+    // ) {
+    //     //
+    // }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Ingredient  $ingredient
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Ingredient $ingredient)
-    {
-        //
-    }
+    // /**
+    //  * Remove the specified resource from storage.
+    //  *
+    //  * @param  \App\Models\Ingredient  $ingredient
+    //  * @return \Illuminate\Http\Response
+    //  */
+    // public function destroy(Ingredient $ingredient)
+    // {
+    //     //
+    // }
 }

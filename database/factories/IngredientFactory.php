@@ -23,7 +23,7 @@ class IngredientFactory extends Factory
         fake()->addProvider(new Restaurant(fake()));
         return [
             'name' => fake()->vegetableName(),
-            'description' => fake()->emoji(),
+            'description' => fake()->paragraph(),
             'is_vegan' => fake()->boolean(),
             'serving_size' => Amount::factory(),
             'batch_size' => Amount::factory(),

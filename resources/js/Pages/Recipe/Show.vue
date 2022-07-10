@@ -2,11 +2,13 @@
 import BreezeAuthenticatedLayout from '@/Layouts/Authenticated.vue';
 import { Head, Link } from '@inertiajs/inertia-vue3';
 
-defineProps(['recipe', 'flat']);
+defineProps({
+    recipe: Object,
+});
 </script>
 
 <template>
-    <Head :title="`\${recipe.name} | Vegify`" />
+    <Head :title="`${recipe.as_ingredient.name} | Vegify  `" />
 
     <BreezeAuthenticatedLayout>
         <template #header>
@@ -55,13 +57,32 @@ defineProps(['recipe', 'flat']);
                                 `${recipe.as_ingredient.batch_size.amount} ${recipe.as_ingredient.batch_size.unit} (${recipe.as_ingredient.batch_size.grams} grams)`
                             }}
                         </div>
-                        <ul class="mt-5">
+                        <div class="mt-5">Ingredients:</div>
+                        <ul class="">
                             <li
-                                v-for="ingredient in recipe.ingredients"
-                                :key="ingredient.id"
-                                class="mt-4"
+                                v-for="iir in recipe.ingredients"
+                                :key="iir.id"
+                                class="mt-2"
                             >
-                                {{ ingredient }}
+                                <Link
+                                    :href="
+                                        route(
+                                            'ingredient.show',
+                                            iir.ingredient.id
+                                        )
+                                    "
+                                    class="hover:underline text:indigo-700 dark:text-indigo-50"
+                                >
+                                    {{ iir.ingredient.name }}
+                                </Link>
+                                {{
+                                    iir.ingredient.is_vegan
+                                        ? 'Vegan!'
+                                        : 'Not vegan!'
+                                }}
+                                {{ iir.amount.amount }}
+                                {{ iir.amount.unit }}
+                                ({{ iir.amount.grams }} grams)
                             </li>
                         </ul>
                     </div>

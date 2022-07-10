@@ -18,6 +18,13 @@ const Icon = computed(() =>
         ? VegifyIconOrigBGDark
         : VegifyIconOrigBGLight
 );
+
+const navLinks = [
+    { label: 'Dashboard', route: 'dashboard', active: 'dashboard' },
+    { label: 'Ingredients', route: 'ingredients', active: 'ingredient' },
+    { label: 'Recipes', route: 'recipes', active: 'recipe' },
+    { label: 'Users', route: 'users', active: 'user' },
+];
 </script>
 
 <template>
@@ -40,31 +47,17 @@ const Icon = computed(() =>
                                 class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex"
                             >
                                 <BreezeNavLink
+                                    v-for="(navLink, index) in navLinks"
+                                    :key="index"
                                     class="dark:text-white"
-                                    :href="route('dashboard')"
-                                    :active="route().current('dashboard')"
-                                >
-                                    Dashboard
-                                </BreezeNavLink>
-                                <BreezeNavLink
-                                    class="dark:text-white"
-                                    :href="route('ingredients')"
+                                    :href="route(navLink.route)"
                                     :active="
                                         route()
                                             .current()
-                                            .startsWith('ingredient')
+                                            .startsWith(navLink.active)
                                     "
                                 >
-                                    Ingredients
-                                </BreezeNavLink>
-                                <BreezeNavLink
-                                    class="dark:text-white"
-                                    :href="route('recipes')"
-                                    :active="
-                                        route().current().startsWith('recipe')
-                                    "
-                                >
-                                    Recipes
+                                    {{ navLink.label }}
                                 </BreezeNavLink>
                             </div>
                         </div>
@@ -163,26 +156,14 @@ const Icon = computed(() =>
                 >
                     <div class="pt-2 pb-3 space-y-1">
                         <BreezeResponsiveNavLink
-                            :href="route('dashboard')"
-                            :active="route().current('dashboard')"
+                            v-for="(navLink, index) in navLinks"
+                            :key="index"
+                            :href="route(navLink.route)"
+                            :active="
+                                route().current().startsWith(navLink.active)
+                            "
                         >
-                            Dashboard
-                        </BreezeResponsiveNavLink>
-                    </div>
-                    <div class="pt-2 pb-3 space-y-1">
-                        <BreezeResponsiveNavLink
-                            :href="route('ingredients')"
-                            :active="route().current('ingredients')"
-                        >
-                            Ingredient
-                        </BreezeResponsiveNavLink>
-                    </div>
-                    <div class="pt-2 pb-3 space-y-1">
-                        <BreezeResponsiveNavLink
-                            :href="route('recipes')"
-                            :active="route().current('recipes')"
-                        >
-                            Recipe
+                            {{ navLink.label }}
                         </BreezeResponsiveNavLink>
                     </div>
 

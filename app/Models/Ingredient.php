@@ -33,7 +33,15 @@ class Ingredient extends Model
     }
 
     /**
-     * Get the batch size associated with the ingredient.
+     * Every recipe in the database is an ingredient, but not every ingredient is a recipe.
+     */
+    public function recipe()
+    {
+        return $this->hasOne(Recipe::class, 'as_ingredient_id', 'id');
+    }
+
+    /**
+     * Get the recipes which use the ingredient.
      */
     public function recipes()
     {
