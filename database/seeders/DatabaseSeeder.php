@@ -98,10 +98,10 @@ class DatabaseSeeder extends Seeder
             ->has(
                 Recipe::factory()
                     ->hasIngredients(2)
-                    ->count(2),
+                    ->count(3),
                 'recipes',
             )
-            ->count(2)
+            ->count(3)
             ->create();
     }
 }

@@ -1,9 +1,8 @@
 <script setup>
 import { Head, Link } from '@inertiajs/inertia-vue3';
-import VegifyLogoOrigBGLight from '@/Components/VegifyLogoOrigBGLight.vue';
-import VegifyLogoOrigBGDark from '@/Components/VegifyLogoOrigBGDark.vue';
-import AddFood from '../../img/Add Food.svg'
-import { usePreferredColorScheme } from '@vueuse/core';
+import VegifyLogo from '@/Components/VegifyLogo/VegifyLogo.vue';
+import Login from '@/Pages/Auth/Login.vue';
+
 import { computed } from 'vue';
 
 defineProps({
@@ -11,63 +10,106 @@ defineProps({
     canRegister: Boolean,
     laravelVersion: String,
     phpVersion: String,
-})
+    recipes: Object,
+});
 
-const preferredColorScheme = usePreferredColorScheme();
-const Logo = computed(() => preferredColorScheme.value == 'dark' ? VegifyLogoOrigBGDark : VegifyLogoOrigBGLight);
+const navLinks = [
+    { label: 'Home', route: 'dashboard', active: 'dashboard' },
+    // { label: 'Explore', route: 'explore', active: 'explore' },
+    // { label: 'Add Food', route: 'add', active: 'add' },
+    { label: 'Recipes', route: 'recipes', active: 'recipe' },
+    { label: 'Ingredients', route: 'ingredients', active: 'ingredient' },
+    { label: 'User', route: 'users', active: 'user' },
+];
 </script>
 
 <template>
-
     <Head title="Welcome" />
-
-    <div
-        class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center sm:pt-0">
-        <div v-if="canLogin" class="fixed top-0 right-0 px-6 py-4 block">
-            <Link v-if="$page.props.auth.user" :href="route('dashboard')"
-                class="text-sm text-gray-700 dark:text-gray-300 underline">
-            Dashboard
-            </Link>
-
-            <template v-else>
-                <Link :href="route('login')" class="text-sm text-gray-700 dark:text-gray-300 underline">
-                Log in
-                </Link>
-
-                <Link v-if="canRegister" :href="route('register')"
-                    class="ml-4 text-sm text-gray-700 dark:text-gray-300 underline">
-                Register
-                </Link>
-            </template>
-        </div>
-
-        <div class="max-w-6xl mx-auto sm:px-12 md:px-40 lg:px-80">
-            <div class="flex justify-center pt-8 sm:justify-start sm:pt-0">
-
-                <Logo class="h-16 w-auto text-gray-700 mt-10 sm:mt-auto sm:h-20" alt="Vegify" />
-
-            </div>
-
-            <div class="mt-8 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg">
-                <div class="grid grid-cols-1 md:grid-cols-1">
-                    <div class="p-6">
-                        <div class="flex items-center">
-                            <img :src="AddFood" class="w-8 h-8 text-gray-500" />
-                            <div class="ml-4 text-lg leading-7 font-semibold"><a href="/"
-                                    class="underline text-gray-900 dark:text-white">Add Ingredients and Recipes</a>
-                            </div>
-                        </div>
-
-                        <div class="ml-12">
-                            <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
-                                Vegify is a marvelous tool for tracking micronutrition, so you can plan your diet with
-                                ease.
-                            </div>
-                        </div>
+    <div class="xl:container mx-auto min-h-screen dark:bg-gray-dark">
+        <div class="flex flex-col md:flex-row justify-center min-h-screen">
+            <nav class="bg-green dark:bg-forest-green">
+                <Link>
+                    <VegifyLogo
+                        color="white"
+                        class="h-20 w-auto mx-auto my-2 md:m-3"
+                /></Link>
+                <ul class="hidden md:contents">
+                    <li
+                        v-for="(navLink, index) in navLinks"
+                        :key="index"
+                        class="font-bold m-2"
+                    >
+                        <Link
+                            :href="route(navLink.route)"
+                            :active="
+                                route().current().startsWith(navLink.active)
+                            "
+                            class="text-white text-3xl hover:underline p-2"
+                        >
+                            {{ navLink.label }}
+                        </Link>
+                    </li>
+                </ul>
+            </nav>
+            <main class="grow bg-white dark:bg-gray-dark">
+                <header>
+                    <div class="text-center">
+                        <input
+                            type="text"
+                            placeholder="Search..."
+                            class="w-4/6 rounded-full m-4 hidden"
+                        />
                     </div>
-                </div>
-            </div>
-
+                    <div
+                        class="mx-4 my-4 text-sm dark:text-gray-light tracking-wide"
+                    >
+                        <Link :href="route('home')" class="hover:underline"
+                            >vegify</Link
+                        >
+                        ➛
+                        <Link :href="route('home')" class="hover:underline"
+                            >Home</Link
+                        >
+                    </div>
+                    <VegifyLogo class="h-auto w-5/6 md:w-4/5 mx-auto my-8" />
+                </header>
+                <main class="dark:text-gray-light">
+                    <Link
+                        v-for="recipe in recipes"
+                        :key="recipe.id"
+                        :href="route('recipe.show', recipe.id)"
+                        class="border-black dark:border-gray-light border-solid border-[1px] rounded-sm m-2 flex divide-x mb-8"
+                    >
+                        <div class="w-1/4 text-center">
+                            <br /><br />Thumbnail
+                        </div>
+                        <div class="p-2">
+                            <div class="font-bold text-3xl dark:text-white">
+                                {{ recipe.as_ingredient.name }}
+                            </div>
+                            <div
+                                class="font capitalize font-serif text-sm leading-6"
+                            >
+                                {{ recipe.subtitle }}
+                            </div>
+                            <div class="font-[300] text-2xl tracking-widest">
+                                000
+                            </div>
+                            <div class="font-light tracking-wide text-md">
+                                Calories Per Serving
+                            </div>
+                        </div>
+                    </Link>
+                </main>
+            </main>
+            <aside
+                class="bg-gray-light dark:bg-gray text-center md:text-left md:max-w-[315px] py-10"
+            >
+                <header class="font-bold text-2xl px-4 dark:text-gray-light">
+                    Start tracking recipes with us, today.
+                </header>
+                <Login />
+            </aside>
         </div>
     </div>
 </template>
