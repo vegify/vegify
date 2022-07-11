@@ -1,6 +1,7 @@
 <script setup>
 import { Head, Link } from '@inertiajs/inertia-vue3';
 import VegifyLogo from '@/Components/VegifyLogo/VegifyLogo.vue';
+import VegifyIcon from '@/Components/VegifyIcon/VegifyIcon.vue';
 import Login from '@/Pages/Auth/Login.vue';
 
 import { computed } from 'vue';
@@ -24,31 +25,38 @@ const navLinks = [
 <template>
     <Head title="Welcome" />
     <div class="dark:bg-gray-dark">
-        <div class="2xl:container mx-auto min-h-screen dark:bg-gray-dark">
-            <div class="flex flex-col md:flex-row justify-center min-h-screen">
-                <nav class="bg-green dark:bg-forest-green">
+        <div class="mx-auto min-h-screen dark:bg-gray-dark">
+            <div class="flex flex-col xl:flex-row justify-center min-h-screen">
+                <nav class="relative bg-green dark:bg-forest-green">
                     <Link>
+                        <VegifyIcon
+                            color="white"
+                            class="max-h-16 w-auto mx-auto my-4 md:hidden" />
                         <VegifyLogo
                             color="white"
-                            class="h-20 w-auto mx-auto my-2 md:m-3"
+                            class="hidden md:block h-20 w-auto mx-auto my-2 md:m-3"
                     /></Link>
-                    <ul class="hidden md:contents">
-                        <li
-                            v-for="(navLink, index) in navLinks"
-                            :key="index"
-                            class="font-bold m-2"
-                        >
-                            <Link
-                                :href="route(navLink.route)"
-                                :active="
-                                    route().current().startsWith(navLink.active)
-                                "
-                                class="text-white text-3xl hover:underline p-2"
+                    <div class="">
+                        <ul class="hidden md:contents">
+                            <li
+                                v-for="(navLink, index) in navLinks"
+                                :key="index"
+                                class="font-bold m-2"
                             >
-                                {{ navLink.label }}
-                            </Link>
-                        </li>
-                    </ul>
+                                <Link
+                                    :href="route(navLink.route)"
+                                    :active="
+                                        route()
+                                            .current()
+                                            .startsWith(navLink.active)
+                                    "
+                                    class="text-white text-3xl hover:underline p-2"
+                                >
+                                    {{ navLink.label }}
+                                </Link>
+                            </li>
+                        </ul>
+                    </div>
                 </nav>
                 <main class="grow bg-white dark:bg-gray-dark">
                     <header>
@@ -71,7 +79,7 @@ const navLinks = [
                             >
                         </div>
                         <VegifyLogo
-                            class="h-auto w-5/6 md:w-4/5 mx-auto my-8"
+                            class="h-auto w-5/6 md:w-4/5 mx-auto my-8 block md:hidden xl:block"
                         />
                     </header>
                     <main class="dark:text-white">
@@ -110,9 +118,9 @@ const navLinks = [
                     </main>
                 </main>
                 <aside
-                    class="bg-gray-light dark:bg-gray text-center md:text-left md:w-[315px] py-10"
+                    class="bg-gray-light dark:bg-gray text-center md:text-left xl:w-[315px] py-10"
                 >
-                    <div v-if="canLogin" class="text-right">
+                    <div v-if="canLogin" class="text-right w-full">
                         <div v-if="$page.props.auth.user">
                             <header
                                 class="font-bold text-2xl px-4 dark:text-gray-light"

@@ -102,15 +102,16 @@ signUpDisabled = computed(() => {
                 </BreezeButton>
                 <div v-if="!signUpDisabled">
                     <p>or</p>
-                    <Button
+                    <a
                         class="border-2 rounded-full disabled:hidden py-1 text-2xl normal-case w-full mx-auto text-center tracking-normal bg-yellow-orange text-white border-yellow-orange hover:bg-[rgba(0,0,0,0.1)] dark:hover:bg-[rgba(0,0,0,0.1)] active:bg-[rgba(0,0,0,0.05)] dark:active:bg-[rgba(0,0,0,0.05)]"
                         type="button"
+                        @click="prevent"
                         :href="route('register')"
                         :class="{ 'opacity-25': form.processing }"
                         :disabled="signUpDisabled"
                     >
                         Sign Up
-                    </Button>
+                    </a>
                 </div>
             </div>
         </form>

@@ -1,7 +1,6 @@
 <script setup>
 import { ref } from 'vue';
-import VegifyIconOrigBGLight from '@/Components/VegifyIconOrigBGLight.vue';
-import VegifyIconOrigBGDark from '@/Components/VegifyIconOrigBGDark.vue';
+import VegifyIcon from '@/Components/VegifyIcon/VegifyIcon.vue';
 import BreezeDropdown from '@/Components/Dropdown.vue';
 import BreezeDropdownLink from '@/Components/DropdownLink.vue';
 import BreezeNavLink from '@/Components/NavLink.vue';
@@ -11,13 +10,6 @@ import { usePreferredColorScheme } from '@vueuse/core';
 import { computed } from 'vue';
 
 const showingNavigationDropdown = ref(false);
-
-const preferredColorScheme = usePreferredColorScheme();
-const Icon = computed(() =>
-    preferredColorScheme.value == 'dark'
-        ? VegifyIconOrigBGDark
-        : VegifyIconOrigBGLight
-);
 
 const navLinks = [
     { label: 'Dashboard', route: 'dashboard', active: 'dashboard' },
@@ -38,7 +30,7 @@ const navLinks = [
                             <!-- Logo -->
                             <div class="shrink-0 flex items-center">
                                 <Link :href="route('home')">
-                                    <Icon class="block h-9 w-auto" />
+                                    <VegifyIcon class="block h-9 w-auto" />
                                 </Link>
                             </div>
 
