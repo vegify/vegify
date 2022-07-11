@@ -6,6 +6,7 @@ import BreezeInput from '@/Components/Input.vue';
 import BreezeLabel from '@/Components/Label.vue';
 import BreezeValidationErrors from '@/Components/ValidationErrors.vue';
 import { Head, Link, useForm } from '@inertiajs/inertia-vue3';
+import { computed, ref } from 'vue';
 
 defineProps({
     canResetPassword: Boolean,
@@ -23,6 +24,12 @@ const submit = () => {
         onFinish: () => form.reset('password'),
     });
 };
+
+let signUpDisabled = ref(false);
+// signUpDisabled = computed(() => form.email.length > 1);
+signUpDisabled = computed(() => {
+    return form.email.length > 0 || form.password.length > 0 || form.processing;
+});
 </script>
 
 <template>
@@ -68,7 +75,7 @@ const submit = () => {
                         v-model:checked="form.remember"
                     />
                     <span
-                        class="ml-2 text-sm text-gray-600 dark:text-white dark:font-bold"
+                        class="ml-2 text-sm text-gray-dark dark:text-white dark:font-bold"
                         >Remember me</span
                     >
                 </label>
@@ -87,22 +94,24 @@ const submit = () => {
                 class="flex-col text-center text-yellow-orange dark:text-white text-2xl font-bold w-4/5 mx-auto mb-10"
             >
                 <BreezeButton
-                    class="border-2 rounded-full py-1 text-2xl normal-case w-full mx-auto text-center tracking-normal dark:bg-gray text-yellow-orange dark:text-white border-yellow-orange dark:border-white hover:bg-[rgba(255,255,255,0.4)] active:bg-[rgba(255,255,255,0.2)]"
+                    class="border-2 rounded-full py-1 text-2xl normal-case w-full mx-auto text-center tracking-normal bg-gray-light dark:bg-gray text-yellow-orange dark:text-white border-yellow-orange dark:border-white hover:bg-[rgba(255,255,255,0.5)] dark:hover:bg-[rgba(255,255,255,0.5)] active:bg-[rgba(255,255,255,0.2)]"
                     :class="{ 'opacity-25': form.processing }"
                     :disabled="form.processing"
                 >
                     Log in
                 </BreezeButton>
-                <p>or</p>
-                <a
-                    class="border-2 rounded-full py-1 text-2xl normal-case w-full mx-auto text-center tracking-normal bg-yellow-orange text-white border-yellow-orange hover:bg-[rgba(0,0,0,0.1)] active:bg-[rgba(0,0,0,0.05)]"
-                    type="button"
-                    :href="route('register')"
-                    :class="{ 'opacity-25': form.processing }"
-                    :disabled="form.processing"
-                >
-                    Sign Up
-                </a>
+                <div v-if="!signUpDisabled">
+                    <p>or</p>
+                    <Button
+                        class="border-2 rounded-full disabled:hidden py-1 text-2xl normal-case w-full mx-auto text-center tracking-normal bg-yellow-orange text-white border-yellow-orange hover:bg-[rgba(0,0,0,0.1)] dark:hover:bg-[rgba(0,0,0,0.1)] active:bg-[rgba(0,0,0,0.05)] dark:active:bg-[rgba(0,0,0,0.05)]"
+                        type="button"
+                        :href="route('register')"
+                        :class="{ 'opacity-25': form.processing }"
+                        :disabled="signUpDisabled"
+                    >
+                        Sign Up
+                    </Button>
+                </div>
             </div>
         </form>
     </BreezeGuestLayout>

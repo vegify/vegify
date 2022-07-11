@@ -22,6 +22,7 @@ module.exports = {
             backgroundImage: {
                 'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
             },
+
             spacing: {},
             borderRadius: {},
             colors: {
@@ -35,13 +36,13 @@ module.exports = {
                 'gray-900': '#2b2b2b',
                 'gray-800': '#2b2b2b',
                 'gray-700': '#2b2b2b',
-                'gray-600': '#2b2b2b',
                 // prettier-ignore
                 "gray": '#8a8b8a',
                 'gray-500': '#8a8b8a',
                 'gray-400': '#8a8b8a',
-                'gray-300': '#8a8b8a',
+                'gray-600': '#8a8b8a',
                 'gray-light': '#f1f1f1',
+                'gray-300': '#f1f1f1',
                 'gray-200': '#f1f1f1',
                 'gray-100': '#f1f1f1',
             },

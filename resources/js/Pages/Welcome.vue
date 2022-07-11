@@ -8,8 +8,6 @@ import { computed } from 'vue';
 defineProps({
     canLogin: Boolean,
     canRegister: Boolean,
-    laravelVersion: String,
-    phpVersion: String,
     recipes: Object,
 });
 
@@ -81,12 +79,14 @@ const navLinks = [
                             v-for="recipe in recipes"
                             :key="recipe.id"
                             :href="route('recipe.show', recipe.id)"
-                            class="dark:bg-gray border-black dark:border-gray-light border-solid border-[1px] rounded-sm m-4 flex divide-x"
+                            class="dark:bg-gray border-black dark:border-gray-light border-solid border-[1px] rounded-sm m-4 flex divide-x dark:hover:border-white hover:shadow-lg transition ease-in-out delay-15 hover:-translate-y-1 hover:scale-110 duration-2ß00"
                         >
-                            <div class="w-1/4 text-center">
+                            <div
+                                class="w-[175px] lg:w-[180px] bg-gray-light dark:text-gray text-center"
+                            >
                                 <br /><br />Thumbnail
                             </div>
-                            <div class="p-2">
+                            <div class="p-2 w-full bg-white dark:bg-gray-dark">
                                 <div class="font-bold text-3xl dark:text-white">
                                     {{ recipe.as_ingredient.name }}
                                 </div>
@@ -110,14 +110,44 @@ const navLinks = [
                     </main>
                 </main>
                 <aside
-                    class="bg-gray-light dark:bg-gray text-center md:text-left md:max-w-[315px] py-10"
+                    class="bg-gray-light dark:bg-gray text-center md:text-left md:w-[315px] py-10"
                 >
-                    <header
-                        class="font-bold text-2xl px-4 dark:text-gray-light"
-                    >
-                        Start tracking recipes with us, today.
-                    </header>
-                    <Login />
+                    <div v-if="canLogin" class="text-right">
+                        <div v-if="$page.props.auth.user">
+                            <header
+                                class="font-bold text-2xl px-4 dark:text-gray-light"
+                            >
+                                Welcome back, {{ $page.props.auth.user.name }}.
+                            </header>
+                            <Link
+                                :href="
+                                    route('user.show', $page.props.auth.user.id)
+                                "
+                                class="py-4 pl-4 text-sm text-gray-700 dark:text-gray-light underline"
+                            >
+                                My Recipes
+                            </Link>
+                            |
+
+                            <Link
+                                class="py-4 pr-4 text-sm text-gray-700 dark:text-gray-light underline"
+                                :href="route('logout')"
+                                method="post"
+                                as="button"
+                            >
+                                Log Out
+                            </Link>
+                        </div>
+
+                        <template v-else>
+                            <header
+                                class="font-bold text-2xl pr-8 dark:text-gray-light"
+                            >
+                                Start tracking recipes with us, today.
+                            </header>
+                            <Login />
+                        </template>
+                    </div>
                 </aside>
             </div>
         </div>
