@@ -6,14 +6,18 @@ import HomeIcon from '@/Components/NavIcons/Home.svg?url';
 import AddFoodIcon from '@/Components/NavIcons/AddFood.svg?url';
 import SearchIcon from '@/Components/NavIcons/Search.svg?url';
 import UserIcon from '@/Components/NavIcons/Profile.svg?url';
+import HamburgerMenuIcon from '@/Components/NavIcons/HamburgerMenuIcon.svg';
+import { useWindowSize } from '@vueuse/core';
 
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 
 defineProps({
     canLogin: Boolean,
     canRegister: Boolean,
     recipes: Object,
 });
+
+const { width } = useWindowSize();
 
 const navLinks = [
     { label: 'Home', route: 'dashboard', active: 'dashboard', icon: HomeIcon },
@@ -28,6 +32,7 @@ const navLinks = [
     },
     { label: 'User', route: 'users', active: 'user', icon: UserIcon },
 ];
+const showMobileNav = ref(false);
 </script>
 
 <template>
@@ -36,37 +41,47 @@ const navLinks = [
         <div class="mx-auto min-h-screen dark:bg-gray-dark">
             <div class="flex flex-col xl:flex-row justify-center min-h-screen">
                 <nav class="relative bg-green dark:bg-forest-green">
+                    <HamburgerMenuIcon
+                        class="w-9 h-9 left-4 top-5 absolute xl:hidden"
+                        @click="showMobileNav = !showMobileNav"
+                    />
                     <Link>
                         <VegifyLogo
                             type="icon"
                             color="white"
-                            class="max-h-16 w-auto mx-auto my-4 md:hidden" />
+                            class="max-h-16 w-auto mx-auto my-4 xl:hidden" />
                         <VegifyLogo
                             color="white"
-                            class="hidden md:block h-20 w-auto mx-auto my-2 md:m-3"
+                            class="hidden xl:block h-20 w-auto mx-auto my-2 md:m-3"
                     /></Link>
-                    <div class="">
-                        <ul class="hidden md:contents">
-                            <Link
-                                v-for="(navLink, index) in navLinks"
-                                :key="index"
-                                :href="route(navLink.route)"
-                                :active="
-                                    route().current().startsWith(navLink.active)
-                                "
-                                class=""
-                            >
-                                <li
-                                    class="font-bold text-white text-3xl hover:underline p-2 hover:bg-[rgba(255,255,255,0.125)]"
+                    <span v-if="showMobileNav || width > 1079">
+                        <div class="">
+                            <ul class="">
+                                <Link
+                                    v-for="(navLink, index) in navLinks"
+                                    :key="index"
+                                    :href="route(navLink.route)"
+                                    :active="
+                                        route()
+                                            .current()
+                                            .startsWith(navLink.active)
+                                    "
+                                    class=""
                                 >
-                                    <img
-                                        :src="navLink.icon"
-                                        class="h-10 w-10 inline mr-[10px] mb-[9px]"
-                                    /><span class="">{{ navLink.label }}</span>
-                                </li>
-                            </Link>
-                        </ul>
-                    </div>
+                                    <li
+                                        class="font-bold text-white text-3xl hover:underline p-2 hover:bg-[rgba(255,255,255,0.125)]"
+                                    >
+                                        <img
+                                            :src="navLink.icon"
+                                            class="h-10 w-10 inline mr-[10px] mb-[9px]"
+                                        /><span class="">{{
+                                            navLink.label
+                                        }}</span>
+                                    </li>
+                                </Link>
+                            </ul>
+                        </div>
+                    </span>
                 </nav>
                 <main class="grow bg-white dark:bg-gray-dark">
                     <header>
@@ -82,7 +97,7 @@ const navLinks = [
                             >
                         </div>
                         <VegifyLogo
-                            class="h-auto w-5/6 md:w-4/5 mx-auto my-8 block md:hidden xl:block"
+                            class="h-auto w-5/6 md:w-4/5 mx-auto my-8 block"
                         />
                     </header>
                     <main class="dark:text-white">
@@ -162,7 +177,7 @@ const navLinks = [
 
                         <template v-else>
                             <header
-                                class="font-bold text-2xl px-8 pb-6 pt-0 dark:text-gray-light"
+                                class="font-bold text-2xl px-8 pb-6 pt-0 sm:text-center xl:text-right dark:text-gray-light"
                             >
                                 Start tracking recipes with us, today.
                             </header>
