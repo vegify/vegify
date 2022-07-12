@@ -101,7 +101,7 @@ class DatabaseSeeder extends Seeder
                     ->count(3),
                 'recipes',
             )
-            ->count(3)
+            ->count(1)
             ->create();
     }
 }

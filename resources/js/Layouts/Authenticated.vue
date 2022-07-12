@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue';
-import VegifyIcon from '@/Components/VegifyIcon/VegifyIcon.vue';
+import VegifyLogo from '@/Components/VegifyLogo/VegifyLogo.vue';
 import BreezeDropdown from '@/Components/Dropdown.vue';
 import BreezeDropdownLink from '@/Components/DropdownLink.vue';
 import BreezeNavLink from '@/Components/NavLink.vue';
@@ -30,7 +30,10 @@ const navLinks = [
                             <!-- Logo -->
                             <div class="shrink-0 flex items-center">
                                 <Link :href="route('home')">
-                                    <VegifyIcon class="block h-9 w-auto" />
+                                    <VegifyLogo
+                                        type="icon"
+                                        class="block h-9 w-auto"
+                                    />
                                 </Link>
                             </div>
 

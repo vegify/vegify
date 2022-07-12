@@ -1,19 +1,41 @@
 <script setup>
 import { computed } from 'vue';
-import VegifyLogoOrigBGLight from './VegifyLogoOrigBGLight.vue';
-import VegifyLogoOrigBGDark from './VegifyLogoOrigBGDark.vue';
-import VegifyLogoWhite from './VegifyLogoWhite.vue';
+import VegifyLogoOrigBGDark from './VegifyLogoBGDark.svg';
+import VegifyLogoOrigBGLight from './VegifyLogoBGLight.svg';
+import VegifyLogoGreenWhite from './VegifyLogoGreenWhite.svg';
+import VegifyLogoGreen from './VegifyLogoGreen.svg';
+import VegifyLogoWhite from './VegifyLogoWhite.svg';
+import VegifyIconOrigBGDark from './VegifyIconBGDark.svg';
+import VegifyIconOrigBGLight from './VegifyIconBGLight.svg';
+import VegifyIconGreenWhite from './VegifyIconGreenWhite.svg';
+import VegifyIconGreen from './VegifyIconGreen.svg';
+import VegifyIconWhite from './VegifyIconWhite.svg';
 import { usePreferredColorScheme } from '@vueuse/core';
-import { propsToAttrMap } from '@vue/shared';
+
 const preferredColorScheme = usePreferredColorScheme();
 
 const props = defineProps({
     color: String,
+    type: String,
 });
 
-const Logo = computed(() =>
-    props.color == 'white'
+const VegifyLogo = computed(() =>
+    props.type == 'icon'
+        ? props.color == 'white'
+            ? VegifyIconWhite
+            : props.color == 'green'
+            ? VegifyIconGreen
+            : props.color == 'greenwhite'
+            ? VegifyIconGreenWhite
+            : preferredColorScheme.value == 'dark'
+            ? VegifyIconOrigBGDark
+            : VegifyIconOrigBGLight
+        : props.color == 'white'
         ? VegifyLogoWhite
+        : props.color == 'green'
+        ? VegifyLogoGreen
+        : props.color == 'greenwhite'
+        ? VegifyLogoGreenWhite
         : preferredColorScheme.value == 'dark'
         ? VegifyLogoOrigBGDark
         : VegifyLogoOrigBGLight
@@ -21,5 +43,5 @@ const Logo = computed(() =>
 </script>
 
 <template>
-    <Logo />
+    <VegifyLogo />
 </template>

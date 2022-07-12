@@ -1,8 +1,11 @@
 <script setup>
 import { Head, Link } from '@inertiajs/inertia-vue3';
 import VegifyLogo from '@/Components/VegifyLogo/VegifyLogo.vue';
-import VegifyIcon from '@/Components/VegifyIcon/VegifyIcon.vue';
 import Login from '@/Pages/Auth/Login.vue';
+import HomeIcon from '@/Components/NavIcons/Home.svg?url';
+import AddFoodIcon from '@/Components/NavIcons/AddFood.svg?url';
+import SearchIcon from '@/Components/NavIcons/Search.svg?url';
+import UserIcon from '@/Components/NavIcons/Profile.svg?url';
 
 import { computed } from 'vue';
 
@@ -13,12 +16,17 @@ defineProps({
 });
 
 const navLinks = [
-    { label: 'Home', route: 'dashboard', active: 'dashboard' },
-    // { label: 'Explore', route: 'explore', active: 'explore' },
-    // { label: 'Add Food', route: 'add', active: 'add' },
-    { label: 'Recipes', route: 'recipes', active: 'recipe' },
-    { label: 'Ingredients', route: 'ingredients', active: 'ingredient' },
-    { label: 'User', route: 'users', active: 'user' },
+    { label: 'Home', route: 'dashboard', active: 'dashboard', icon: HomeIcon },
+    // { label: 'Explore', route: 'explore', active: ,'explore' icon:  },
+    // { label: 'Add Food', route: 'add', active: ,'add' icon:  },
+    { label: 'Recipes', route: 'recipes', active: 'recipe', icon: AddFoodIcon },
+    {
+        label: 'Ingredients',
+        route: 'ingredients',
+        active: 'ingredient',
+        icon: SearchIcon,
+    },
+    { label: 'User', route: 'users', active: 'user', icon: UserIcon },
 ];
 </script>
 
@@ -29,7 +37,8 @@ const navLinks = [
             <div class="flex flex-col xl:flex-row justify-center min-h-screen">
                 <nav class="relative bg-green dark:bg-forest-green">
                     <Link>
-                        <VegifyIcon
+                        <VegifyLogo
+                            type="icon"
                             color="white"
                             class="max-h-16 w-auto mx-auto my-4 md:hidden" />
                         <VegifyLogo
@@ -38,35 +47,29 @@ const navLinks = [
                     /></Link>
                     <div class="">
                         <ul class="hidden md:contents">
-                            <li
+                            <Link
                                 v-for="(navLink, index) in navLinks"
                                 :key="index"
-                                class="font-bold m-2"
+                                :href="route(navLink.route)"
+                                :active="
+                                    route().current().startsWith(navLink.active)
+                                "
+                                class=""
                             >
-                                <Link
-                                    :href="route(navLink.route)"
-                                    :active="
-                                        route()
-                                            .current()
-                                            .startsWith(navLink.active)
-                                    "
-                                    class="text-white text-3xl hover:underline p-2"
+                                <li
+                                    class="font-bold text-white text-3xl hover:underline p-2 hover:bg-[rgba(255,255,255,0.125)]"
                                 >
-                                    {{ navLink.label }}
-                                </Link>
-                            </li>
+                                    <img
+                                        :src="navLink.icon"
+                                        class="h-10 w-10 inline mr-[10px] mb-[9px]"
+                                    /><span class="">{{ navLink.label }}</span>
+                                </li>
+                            </Link>
                         </ul>
                     </div>
                 </nav>
                 <main class="grow bg-white dark:bg-gray-dark">
                     <header>
-                        <div class="text-center">
-                            <input
-                                type="text"
-                                placeholder="Search..."
-                                class="w-4/6 rounded-full m-4 hidden"
-                            />
-                        </div>
                         <div
                             class="mx-4 my-4 text-sm dark:text-gray-light tracking-wide"
                         >
@@ -83,6 +86,16 @@ const navLinks = [
                         />
                     </header>
                     <main class="dark:text-white">
+                        <div class="text-center w-full">
+                            <input
+                                type="text"
+                                placeholder="Search..."
+                                class="w-4/6 rounded-full m-4"
+                            /><img
+                                class="inline h-9 w-9 ml-[-56px] mb-[3px]"
+                                :src="SearchIcon"
+                            />
+                        </div>
                         <Link
                             v-for="recipe in recipes"
                             :key="recipe.id"
@@ -118,7 +131,7 @@ const navLinks = [
                     </main>
                 </main>
                 <aside
-                    class="bg-gray-light dark:bg-gray text-center md:text-left xl:w-[315px] py-10"
+                    class="bg-gray-light dark:bg-gray text-center md:text-left xl:w-[315px] py-3 sm:py-5"
                 >
                     <div v-if="canLogin" class="text-right w-full">
                         <div v-if="$page.props.auth.user">
@@ -149,7 +162,7 @@ const navLinks = [
 
                         <template v-else>
                             <header
-                                class="font-bold text-2xl pr-8 dark:text-gray-light"
+                                class="font-bold text-2xl px-8 pb-6 pt-0 dark:text-gray-light"
                             >
                                 Start tracking recipes with us, today.
                             </header>
