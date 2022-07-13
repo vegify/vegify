@@ -4,6 +4,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Models\Recipe;
+use App\Http\Controllers\SearchController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +26,10 @@ Route::get('/', function () {
         'recipes' => Recipe::all(),
     ]);
 })->name('home');
+
+Route::get('search/{biga}', function (Request $request) {
+    return SearchController::class;
+})->name('search');
 
 Route::get('/dashboard', function () {
     return redirect('/');

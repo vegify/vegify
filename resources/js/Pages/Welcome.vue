@@ -10,6 +10,7 @@ import HamburgerMenuIcon from '@/Components/NavIcons/HamburgerMenuIcon.svg';
 import { useWindowSize } from '@vueuse/core';
 import { useElementSize } from '@vueuse/core';
 import { useResizeObserver } from '@vueuse/core';
+import RecipeCard from '@/Components/RecipeCard.vue';
 import { computed, ref } from 'vue';
 
 defineProps({
@@ -56,7 +57,6 @@ const showMobileNav = ref(false);
                     <div
                         class="bg-green dark:bg-forest-green py-2 relative z-50"
                     >
-                        <!-- <span class="">{{ navHeight }}</span> -->
                         <HamburgerMenuIcon
                             class="w-9 h-9 absolute top-2 left-2 xl:hidden"
                             @click="showMobileNav = !showMobileNav"
@@ -122,13 +122,16 @@ const showMobileNav = ref(false);
                         />
                     </header>
                     <main class="dark:text-white">
-                        <div class="text-center w-full">
+                        <div
+                            class="relative my-10 mx-auto w-4/5 md:w-3/4 lg:w-2/3"
+                        >
                             <input
                                 type="text"
                                 placeholder="Search..."
-                                class="w-4/6 rounded-full m-4"
-                            /><img
-                                class="inline h-9 w-9 ml-[-56px] mb-[3px]"
+                                class="static text-black text-xl px-[19px] p-2 w-full rounded-full"
+                            />
+                            <img
+                                class="absolute h-9 w-9 right-[.25rem] top-[.35rem]"
                                 :src="SearchIcon"
                             />
                         </div>
@@ -136,33 +139,8 @@ const showMobileNav = ref(false);
                             v-for="recipe in recipes"
                             :key="recipe.id"
                             :href="route('recipe.show', recipe.id)"
-                            class="dark:bg-gray border-black dark:border-gray-light border-solid border-[1px] rounded-sm m-4 flex divide-x dark:hover:border-white hover:shadow-lg transition ease-in-out delay-15 hover:-translate-y-1 hover:scale-110 duration-2ß00"
                         >
-                            <div
-                                class="w-[175px] lg:w-[180px] bg-gray-light dark:text-gray text-center"
-                            >
-                                <br /><br />Thumbnail
-                            </div>
-                            <div class="p-2 w-full bg-white dark:bg-gray-dark">
-                                <div class="font-bold text-3xl dark:text-white">
-                                    {{ recipe.as_ingredient.name }}
-                                </div>
-                                <div
-                                    class="font capitalize font-serif text-sm leading-6"
-                                >
-                                    {{ recipe.subtitle }}
-                                </div>
-                                <div
-                                    class="font-[300] text-2xl tracking-widest"
-                                >
-                                    000
-                                </div>
-                                <div
-                                    class="font-light font-serif tracking-wide text-xs"
-                                >
-                                    Calories Per Serving
-                                </div>
-                            </div>
+                            <RecipeCard :recipe="recipe" />
                         </Link>
                     </main>
                 </main>

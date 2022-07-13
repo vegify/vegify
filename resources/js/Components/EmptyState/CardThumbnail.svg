@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="280px" height="281px" viewBox="0 0 280 281" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Wireframe/Page Elements/Ingredient Thumbnail</title>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Wireframe-/-Desktop-/-Featured-Content-/-Recipe" transform="translate(0.000000, -2.000000)">
+            <g id="Wireframe/Page-Elements/Ingredient-Thumbnail" transform="translate(0.000000, 2.700000)">
+                <g id="Image" stroke="#C2C2C2" stroke-width="1.863">
+                    <rect id="Rectangle" x="0.9315" y="0.9315" width="276.665748" height="277.587" rx="5.589"></rect>
+                    <g id="basic_picture" transform="translate(92.513303, 124.790625)">
+                        <rect id="Rectangle-path" x="0" y="0" width="96.9221917" height="65.6569686" rx="5.589"></rect>
+                        <polyline id="Shape" points="0 56.2774016 35.9550066 25.0121785 54.7141405 43.7713124 64.0937074 31.2652231 96.9221917 59.403924"></polyline>
+                        <circle id="Oval" cx="78.1630578" cy="17.1958727" r="7.81630578"></circle>
+                    </g>
+                </g>
+                <text id="Thumbnail" font-family="Lato-Bold, Lato" font-size="29.808" font-weight="bold" fill="#C2C2C2">
+                    <tspan x="69.4851695" y="73.24625">Thumbnail</tspan>
+                </text>
+            </g>
+        </g>
+    </g>
+</svg>
