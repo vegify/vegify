@@ -4,14 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\Pivot;
-use Laravel\Scout\Searchable;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\IngredientInRecipe>
  */
 class IngredientInRecipe extends Pivot
 {
-    use HasFactory, Searchable;
+    use HasFactory;
 
     protected $with = ['ingredient', 'amount'];
 

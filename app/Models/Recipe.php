@@ -32,8 +32,8 @@ class Recipe extends Model
         return $this->hasMany(IngredientInRecipe::class, 'recipe_id', 'id');
     }
 
-    public function searchable(): bool
+    public function searchableAs()
     {
-        return true;
+        return 'recipes_index';
     }
 }

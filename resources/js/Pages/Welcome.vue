@@ -20,14 +20,8 @@ defineProps({
 });
 
 const { width: viewPortWidth } = useWindowSize();
-const navRef = ref(null);
-const navHeight = ref(0);
 
-useResizeObserver(navRef, (entries) => {
-    const entry = entries[0];
-    const { width: elNavWidth, height: elNavHeight } = entry.contentRect;
-    navHeight.value = elNavHeight;
-});
+let searchTerm = ref('');
 
 const navLinks = [
     { label: 'Home', route: 'dashboard', active: 'dashboard', icon: HomeIcon },
@@ -51,7 +45,7 @@ const showMobileNav = ref(false);
         <div class="mx-auto min-h-screen dark:bg-gray-dark">
             <div class="flex flex-col xl:flex-row min-h-screen">
                 <nav
-                    class="sticky top-0 z-50 xl:bg-green xl:dark:bg-forest-green"
+                    class="sticky top-0 z-50 xl:block xl:z-0 xl:bg-green xl:dark:bg-forest-green"
                     ref="navRef"
                 >
                     <div
@@ -127,11 +121,13 @@ const showMobileNav = ref(false);
                         >
                             <input
                                 type="text"
+                                id="search"
                                 placeholder="Search..."
+                                v-model="searchTerm"
                                 class="static text-black text-xl px-[19px] p-2 w-full rounded-full"
                             />
                             <img
-                                class="absolute h-9 w-9 right-[.25rem] top-[.35rem]"
+                                class="absolute h-9 w-9 right-[.25rem] top-[.35rem] cursor-pointer"
                                 :src="SearchIcon"
                             />
                         </div>
