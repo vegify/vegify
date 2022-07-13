@@ -8,11 +8,14 @@
         "php": "^8.0.2",
         "doctrine/dbal": "^3.3",
         "guzzlehttp/guzzle": "^7.2",
+        "http-interop/http-factory-guzzle": "^1.2",
         "inertiajs/inertia-laravel": "^0.5.4",
         "jzonta/faker-restaurant": "^2.0",
         "laravel/framework": "^9.19",
         "laravel/sanctum": "^2.8",
+        "laravel/scout": "^9.4",
         "laravel/tinker": "^2.7",
+        "meilisearch/meilisearch-php": "^0.24.0",
         "tightenco/ziggy": "^1.0"
     },
     "require-dev": {

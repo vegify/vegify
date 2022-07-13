@@ -8,7 +8,8 @@ import SearchIcon from '@/Components/NavIcons/Search.svg?url';
 import UserIcon from '@/Components/NavIcons/Profile.svg?url';
 import HamburgerMenuIcon from '@/Components/NavIcons/HamburgerMenuIcon.svg';
 import { useWindowSize } from '@vueuse/core';
-
+import { useElementSize } from '@vueuse/core';
+import { useResizeObserver } from '@vueuse/core';
 import { computed, ref } from 'vue';
 
 defineProps({
@@ -17,7 +18,15 @@ defineProps({
     recipes: Object,
 });
 
-const { width } = useWindowSize();
+const { width: viewPortWidth } = useWindowSize();
+const navRef = ref(null);
+const navHeight = ref(0);
+
+useResizeObserver(navRef, (entries) => {
+    const entry = entries[0];
+    const { width: elNavWidth, height: elNavHeight } = entry.contentRect;
+    navHeight.value = elNavHeight;
+});
 
 const navLinks = [
     { label: 'Home', route: 'dashboard', active: 'dashboard', icon: HomeIcon },
@@ -39,23 +48,34 @@ const showMobileNav = ref(false);
     <Head title="Welcome" />
     <div class="dark:bg-gray-dark">
         <div class="mx-auto min-h-screen dark:bg-gray-dark">
-            <div class="flex flex-col xl:flex-row justify-center min-h-screen">
-                <nav class="relative bg-green dark:bg-forest-green">
-                    <HamburgerMenuIcon
-                        class="w-9 h-9 left-4 top-5 absolute xl:hidden"
-                        @click="showMobileNav = !showMobileNav"
-                    />
-                    <Link>
-                        <VegifyLogo
-                            type="icon"
-                            color="white"
-                            class="max-h-16 w-auto mx-auto my-4 xl:hidden" />
-                        <VegifyLogo
-                            color="white"
-                            class="hidden xl:block h-20 w-auto mx-auto my-2 md:m-3"
-                    /></Link>
-                    <span v-if="showMobileNav || width > 1079">
-                        <div class="">
+            <div class="flex flex-col xl:flex-row min-h-screen">
+                <nav
+                    class="sticky top-0 z-50 xl:bg-green xl:dark:bg-forest-green"
+                    ref="navRef"
+                >
+                    <div
+                        class="bg-green dark:bg-forest-green py-2 relative z-50"
+                    >
+                        <!-- <span class="">{{ navHeight }}</span> -->
+                        <HamburgerMenuIcon
+                            class="w-9 h-9 absolute top-2 left-2 xl:hidden"
+                            @click="showMobileNav = !showMobileNav"
+                        />
+                        <Link class="">
+                            <VegifyLogo
+                                type="icon"
+                                color="white"
+                                class="max-h-16 w-auto mx-auto xl:hidden" />
+                            <VegifyLogo
+                                color="white"
+                                class="hidden xl:block h-20 w-auto mx-auto md:m-3"
+                        /></Link>
+                    </div>
+                    <transition name="slide" class="absolute z-0">
+                        <div
+                            class="bg-green dark:bg-forest-green w-full"
+                            v-show="showMobileNav || viewPortWidth > 1279"
+                        >
                             <ul class="">
                                 <Link
                                     v-for="(navLink, index) in navLinks"
@@ -81,8 +101,9 @@ const showMobileNav = ref(false);
                                 </Link>
                             </ul>
                         </div>
-                    </span>
+                    </transition>
                 </nav>
+
                 <main class="grow bg-white dark:bg-gray-dark">
                     <header>
                         <div
@@ -189,3 +210,18 @@ const showMobileNav = ref(false);
         </div>
     </div>
 </template>
+
+<style scoped>
+.slide-enter-active {
+    transition: transform 0.3s ease-out;
+}
+
+.slide-leave-active {
+    transition: transform 0.2s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.slide-enter-from,
+.slide-leave-to {
+    transform: translateY(-200%);
+}
+</style>
