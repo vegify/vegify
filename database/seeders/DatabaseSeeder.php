@@ -97,8 +97,8 @@ class DatabaseSeeder extends Seeder
         User::factory()
             ->has(
                 Recipe::factory()
-                    ->hasIngredients(2)
-                    ->count(3),
+                    ->hasIngredients(1)
+                    ->count(15),
                 'recipes',
             )
             ->count(1)

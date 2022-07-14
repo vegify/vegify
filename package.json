@@ -29,6 +29,7 @@
     },
     "dependencies": {
         "@vueuse/core": "^8.7.5",
-        "svgo": "^2.8.0"
+        "svgo": "^2.8.0",
+        "vue-router": "^4.1.2"
     }
 }
