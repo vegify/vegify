@@ -1,5 +1,5 @@
 <script setup>
-import CardThumbnail from '@/Components/EmptyState/CardThumbnail.svg';
+import CardThumbnail from '@/Assets/Icons/CardThumbnail.svg';
 import { computed } from 'vue';
 
 const props = defineProps({

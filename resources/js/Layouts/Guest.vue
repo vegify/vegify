@@ -1,5 +1,5 @@
 <script setup>
-import VegifyLogo from '@/Components/VegifyLogo/VegifyLogo.vue';
+import VegifyLogo from '@/Assets/VegifyLogo/TheVegifyLogo.vue';
 import { Link } from '@inertiajs/inertia-vue3';
 </script>
 

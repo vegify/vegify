@@ -1,11 +1,11 @@
 <script setup>
 import { Head, Link } from '@inertiajs/inertia-vue3';
-import HamburgerMenuIcon from '@/Components/NavIcons/HamburgerMenuIcon.svg';
-import VegifyLogo from '@/Components/VegifyLogo/VegifyLogo.vue';
-import UserIcon from '@/Components/NavIcons/Profile.svg?url';
-import HomeIcon from '@/Components/NavIcons/Home.svg?url';
-import SearchIcon from '@/Components/NavIcons/Search.svg?url';
-import AddFoodIcon from '@/Components/NavIcons/AddFood.svg?url';
+import HamburgerMenuIcon from '@/Assets/Icons/HamburgerMenuIcon.svg';
+import VegifyLogo from '@/Assets/VegifyLogo/TheVegifyLogo.vue';
+import UserIcon from '@/Assets/Icons/Profile.svg?url';
+import HomeIcon from '@/Assets/Icons/Home.svg?url';
+import SearchIcon from '@/Assets/Icons/Search.svg?url';
+import AddFoodIcon from '@/Assets/Icons/AddFood.svg?url';
 import { useWindowSize } from '@vueuse/core';
 import { ref } from 'vue';
 

@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue';
-import VegifyLogo from '@/Components/VegifyLogo/VegifyLogo.vue';
+import VegifyLogo from '@/Assets/VegifyLogo/TheVegifyLogo.vue';
 import BreezeDropdown from '@/Components/Dropdown.vue';
 import BreezeDropdownLink from '@/Components/DropdownLink.vue';
 import BreezeNavLink from '@/Components/NavLink.vue';

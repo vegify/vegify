@@ -1,13 +1,9 @@
 <script setup>
 import { Head, Link } from '@inertiajs/inertia-vue3';
-
 import Login from '@/Pages/Auth/Login.vue';
-import SearchIcon from '@/Components/NavIcons/Search.svg?url';
-import XIcon from '@/Components/UIIcons/XIcon.svg?url';
-import VegifyLogo from '@/Components/VegifyLogo/VegifyLogo.vue';
-
-import { useElementSize } from '@vueuse/core';
-import { useResizeObserver } from '@vueuse/core';
+import SearchIcon from '@/Assets/Icons/Search.svg?url';
+import XIcon from '@/Assets/Icons/XIcon.svg?url';
+import VegifyLogo from '@/Assets/VegifyLogo/TheVegifyLogo.vue';
 import RecipeCard from '@/Components/RecipeCard.vue';
 import NavMenu from '@/Components/Nav/TheNavMenu.vue';
 import { watch, ref } from 'vue';

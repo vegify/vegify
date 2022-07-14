@@ -1,6 +1,6 @@
 <script setup>
 import { computed } from 'vue';
-import emptystate from '@/Components/EmptyState/EmptyState.vue';
+import emptystate from '@/Assets/EmptyState.vue';
 defineProps({
     recipe: Object,
 });
