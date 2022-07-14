@@ -31,6 +31,10 @@ Route::get('search/{search}', function (Request $request) {
     return Recipe::search($request->search)->get();
 })->name('search');
 
+Route::post('search', function (Request $request) {
+    return Recipe::search($request->search)->get();
+})->name('search.post');
+
 Route::get('/dashboard', function () {
     return redirect('/');
 })
