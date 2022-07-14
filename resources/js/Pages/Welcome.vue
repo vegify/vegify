@@ -6,12 +6,13 @@ import HomeIcon from '@/Components/NavIcons/Home.svg?url';
 import AddFoodIcon from '@/Components/NavIcons/AddFood.svg?url';
 import SearchIcon from '@/Components/NavIcons/Search.svg?url';
 import UserIcon from '@/Components/NavIcons/Profile.svg?url';
+import XIcon from '@/Components/UIIcons/XIcon.svg?url';
 import HamburgerMenuIcon from '@/Components/NavIcons/HamburgerMenuIcon.svg';
 import { useWindowSize } from '@vueuse/core';
 import { useElementSize } from '@vueuse/core';
 import { useResizeObserver } from '@vueuse/core';
 import RecipeCard from '@/Components/RecipeCard.vue';
-import { computed, ref } from 'vue';
+import { watch, ref } from 'vue';
 
 defineProps({
     canLogin: Boolean,
@@ -21,7 +22,18 @@ defineProps({
 
 const { width: viewPortWidth } = useWindowSize();
 
-let searchTerm = ref('');
+const searchTerm = ref('');
+const searchResults = ref([]);
+
+watch(searchTerm, async (newSearch, oldSearch) => {
+    searchResults.value = [];
+    try {
+        const res = await fetch(`/search/${newSearch}`);
+        searchResults.value = await res.json();
+    } catch (error) {
+        searchResults.value = [];
+    }
+});
 
 const navLinks = [
     { label: 'Home', route: 'dashboard', active: 'dashboard', icon: HomeIcon },
@@ -70,7 +82,7 @@ const showMobileNav = ref(false);
                             class="bg-green dark:bg-forest-green w-full"
                             v-show="showMobileNav || viewPortWidth > 1279"
                         >
-                            <ul class="">
+                            <ul>
                                 <Link
                                     v-for="(navLink, index) in navLinks"
                                     :key="index"
@@ -80,7 +92,6 @@ const showMobileNav = ref(false);
                                             .current()
                                             .startsWith(navLink.active)
                                     "
-                                    class=""
                                 >
                                     <li
                                         class="font-bold text-white text-3xl hover:underline p-2 hover:bg-[rgba(255,255,255,0.125)]"
@@ -127,17 +138,43 @@ const showMobileNav = ref(false);
                                 class="static text-black text-xl px-[19px] p-2 w-full rounded-full"
                             />
                             <img
+                                v-if="searchTerm.length > 0"
+                                class="absolute h-9 w-9 right-[.25rem] top-[.35rem] cursor-pointer"
+                                :src="XIcon"
+                                @click="searchTerm = ''"
+                            />
+                            <img
+                                v-else
                                 class="absolute h-9 w-9 right-[.25rem] top-[.35rem] cursor-pointer"
                                 :src="SearchIcon"
                             />
                         </div>
+                        <div
+                            v-if="searchTerm.length > 0"
+                            class="mx-auto text-center text-lg"
+                        >
+                            <strong>{{ searchResults.length }}</strong> search
+                            result{{
+                                searchResults.length === 1 ? '' : 's'
+                            }}
+                            for "{{ searchTerm }}"
+                        </div>
                         <Link
-                            v-for="recipe in recipes"
+                            v-for="recipe in searchResults"
                             :key="recipe.id"
                             :href="route('recipe.show', recipe.id)"
                         >
                             <RecipeCard :recipe="recipe" />
                         </Link>
+                        <div v-show="searchResults.length < 1">
+                            <Link
+                                v-for="recipe in recipes"
+                                :key="recipe.id"
+                                :href="route('recipe.show', recipe.id)"
+                            >
+                                <RecipeCard :recipe="recipe" />
+                            </Link>
+                        </div>
                     </main>
                 </main>
                 <aside
