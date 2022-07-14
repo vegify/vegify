@@ -78,5 +78,8 @@ defineProps({
                 </div>
             </div>
         </div>
+        <template #sidebar>
+            <div class="bg-white w-4/5 mx-auto px-2 text-lg">Nutrition Facts</div>
+        </template>
     </TheLayout>
 </template>

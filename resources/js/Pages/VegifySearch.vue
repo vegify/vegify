@@ -25,7 +25,7 @@ watch(searchTerm, async (newSearch, oldSearch) => {
 <template>
     <div class="dark:text-white">
         <div class="relative my-10 mx-auto w-4/5 md:w-3/4 lg:w-2/3">
-            <input type="text" id="search" placeholder="Search..." v-model="searchTerm"
+            <input type="text" id="search" placeholder="Search..." v-model="searchTerm" autofocus
                 class="static text-black text-xl px-[19px] p-2 w-full rounded-full" />
             <img v-if="searchTerm.length > 0" class="absolute h-9 w-9 right-[.25rem] top-[.35rem] cursor-pointer"
                 :src="XIcon" @click="searchTerm = ''" />
