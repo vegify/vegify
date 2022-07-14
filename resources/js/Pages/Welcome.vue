@@ -150,18 +150,3 @@ watch(searchTerm, async (newSearch, oldSearch) => {
         </div>
     </div>
 </template>
-
-<style scoped>
-.slide-enter-active {
-    transition: transform 0.3s ease-out;
-}
-
-.slide-leave-active {
-    transition: transform 0.2s cubic-bezier(1, 0.5, 0.8, 1);
-}
-
-.slide-enter-from,
-.slide-leave-to {
-    transform: translateY(-200%);
-}
-</style>
