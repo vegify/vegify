@@ -36,17 +36,19 @@ const loginOrRegister = ref('login');
                     <header class="font-bold text-right text-2xl px-4 dark:text-gray-light">
                         Welcome back, {{ $page.props.auth.user.name }}.
                     </header>
-                    <Link :href="
-                        route('user.show', $page.props.auth.user.id)
-                    " class="py-4 pl-4 text-sm text-gray-700 dark:text-gray-light underline">
-                    My Recipes
-                    </Link>
-                    |
+                    <div class="text-right mr-1">
+                        <Link :href="
+                            route('user.show', $page.props.auth.user.id)
+                        " class="py-4 pl-4 text-sm text-gray-700 dark:text-gray-light underline">
+                        My Recipes
+                        </Link>
+                        |
 
-                    <Link class="py-4 pr-4 text-sm text-gray-700 dark:text-gray-light underline" :href="route('logout')"
-                        method="post" as="button" preserve-scroll>
-                    Log Out
-                    </Link>
+                        <Link class="py-4 pr-4 text-sm text-gray-700 dark:text-gray-light underline"
+                            :href="route('logout')" method="post" as="button" preserve-scroll>
+                        Log Out
+                        </Link>
+                    </div>
                 </div>
 
                 <template v-else>
@@ -65,13 +67,28 @@ const loginOrRegister = ref('login');
                         <input type="radio" id="register" value="register" v-model="loginOrRegister" class="mx-2" />
                         <label for="login">Signup</label>
                     </div>
-                    <Login v-if="loginOrRegister === 'login'" />
-                    <Register v-else />
+                    <Transition name="slide-up" mode="out-in">
+                        <Login v-if="loginOrRegister === 'login'" />
+                        <Register v-else-if="loginOrRegister === 'register'" />
+                    </Transition>
 
                 </template>
             </div>
         </template>
     </TheLayout>
-
-
 </template>
+
+<style>
+.slide-up-enter-active,
+.slide-up-leave-active {
+    transition: all 0.15s ease-out;
+}
+
+.slide-up-enter-from {
+    opacity: 0;
+}
+
+.slide-up-leave-to {
+    opacity: 0;
+}
+</style>
