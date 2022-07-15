@@ -16,7 +16,7 @@ defineProps({
 
             <Link :href="route('recipes')">Recipes</Link>
             ➛
-            {{ recipe.as_ingredient.name }}
+            {{ `${recipe.as_ingredient.name} | ${recipe.subtitle}` }}
 
         </template>
 

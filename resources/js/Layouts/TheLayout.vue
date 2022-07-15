@@ -1,8 +1,13 @@
 <script setup>
 import { Head, Link } from '@inertiajs/inertia-vue3';
+import { ref, computed } from 'vue';
 import NavMenu from '@/Layouts/TheNavMenu.vue';
 import VegifyLogo from '@/Assets/VegifyLogo/TheVegifyLogo.vue';
 
+
+
+const currentName = ref(route().current());
+const showBreadcrumbs = computed(() => currentName.value !== "home");
 </script>
 
 <template>
@@ -15,8 +20,11 @@ import VegifyLogo from '@/Assets/VegifyLogo/TheVegifyLogo.vue';
 
 
                         <div class="mx-4 my-4 text-sm dark:text-gray-light tracking-wide">
-                            <Link :href="route('home')" class="hover:underline">vegify</Link>
-                            ➛
+                            <!-- Breadcrumbs -->
+                            <span v-if="showBreadcrumbs">
+                                <Link :href="route('home')" class="hover:underline">vegify</Link>
+                                <span class="mx-2">➛</span>
+                            </span>
                             <slot name="header" />
                             <VegifyLogo class="h-auto w-5/6 md:w-4/5 mx-auto my-8 block" />
                         </div>

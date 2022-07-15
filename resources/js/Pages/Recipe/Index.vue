@@ -1,5 +1,5 @@
 <script setup>
-import BreezeAuthenticatedLayout from '@/Layouts/Authenticated.vue';
+import TheLayout from '@/Layouts/TheLayout.vue';
 import { Head, Link } from '@inertiajs/inertia-vue3';
 
 defineProps({
@@ -8,41 +8,29 @@ defineProps({
 </script>
 
 <template>
+
     <Head title="Recipe" />
 
-    <BreezeAuthenticatedLayout>
+    <TheLayout>
         <template #header>
-            <h2
-                class="font-semibold text-xl text-gray-800 dark:text-white leading-tight"
-            >
-                Recipes
-            </h2>
+            <Link :href="route('recipes')">Recipes</Link>
         </template>
 
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div
-                    class="bg-white dark:bg-gray-800 dark:text-white overflow-hidden shadow-sm sm:rounded-lg"
-                >
-                    <div
-                        class="p-6 bg-white dark:bg-gray-700 border-b border-gray-200 dark:border-gray-900"
-                        v-for="recipe in recipes"
-                        :key="recipe.id"
-                    >
+                <div class="bg-white dark:bg-gray-800 dark:text-white overflow-hidden shadow-sm sm:rounded-lg">
+                    <div class="p-6 bg-white dark:bg-gray-700 border-b border-gray-200 dark:border-gray-900"
+                        v-for="recipe in recipes" :key="recipe.id">
                         <div>
-                            <Link
-                                :href="route('recipe.show', recipe)"
-                                class="hover:underline text:indigo-700 dark:text-indigo-50"
-                            >
-                                {{ recipe.as_ingredient.name }}
+                            <Link :href="route('recipe.show', recipe)"
+                                class="hover:underline text:indigo-700 dark:text-indigo-50">
+                            {{ recipe.as_ingredient.name }}
                             </Link>
                             <div>{{ recipe.subtitle }}</div>
                             by
-                            <Link
-                                :href="route('user.show', recipe.creator)"
-                                class="hover:underline text:indigo-700 dark:text-indigo-50"
-                            >
-                                @{{ recipe.creator.name }}
+                            <Link :href="route('user.show', recipe.creator)"
+                                class="hover:underline text:indigo-700 dark:text-indigo-50">
+                            @{{ recipe.creator.name }}
                             </Link>
                         </div>
                         <div class="mt-4 leading-6 mb-6">
@@ -56,18 +44,20 @@ defineProps({
                         <div>
                             Serving Size:
                             {{
-                                `${recipe.as_ingredient.serving_size.amount} ${recipe.as_ingredient.serving_size.unit} (${recipe.as_ingredient.serving_size.grams} grams)`
+                                    `${recipe.as_ingredient.serving_size.amount} ${recipe.as_ingredient.serving_size.unit}
+                                                        (${recipe.as_ingredient.serving_size.grams} grams)`
                             }}
                         </div>
                         <div>
                             Batch Size:
                             {{
-                                `${recipe.as_ingredient.batch_size.amount} ${recipe.as_ingredient.batch_size.unit} (${recipe.as_ingredient.batch_size.grams} grams)`
+                                    `${recipe.as_ingredient.batch_size.amount} ${recipe.as_ingredient.batch_size.unit}
+                                                        (${recipe.as_ingredient.batch_size.grams} grams)`
                             }}
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </BreezeAuthenticatedLayout>
+    </TheLayout>
 </template>

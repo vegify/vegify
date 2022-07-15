@@ -27,13 +27,9 @@ Route::get('/', function () {
     ]);
 })->name('home');
 
-Route::get('search/{search}', function (Request $request) {
+Route::get('/search/{search}', function (Request $request) {
     return Recipe::search($request->search)->get();
-})->name('search');
-
-Route::post('search', function (Request $request) {
-    return Recipe::search($request->search)->get();
-})->name('search.post');
+})->name('search.get');
 
 Route::get('/dashboard', function () {
     return redirect('/');

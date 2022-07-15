@@ -1,24 +1,29 @@
 
 <script setup>
 import { watch, ref, computed } from 'vue';
+import { Inertia } from '@inertiajs/inertia';
 import { Link } from '@inertiajs/inertia-vue3';
 import { usePage } from '@inertiajs/inertia-vue3'
 import RecipeCard from '@/Components/RecipeCard.vue';
 import SearchIcon from '@/Assets/Icons/Search.svg?url';
 import XIcon from '@/Assets/Icons/XIcon.svg?url';
+
 const searchTerm = ref('');
 const searchResults = ref([]);
 
 const recipes = computed(() => usePage().props.value.recipes)
 
-watch(searchTerm, async (newSearch, oldSearch) => {
+watch(searchTerm, async (newSearch) => {
     searchResults.value = [];
-    try {
-        const res = await fetch(`/search/${newSearch}`);
-        searchResults.value = await res.json();
-    } catch (error) {
-        searchResults.value = [];
-    }
+    if (newSearch.length > 0)
+        try {
+            const res = await fetch(`/search/${newSearch}/`, {
+                method: 'get',
+            });
+            searchResults.value = await res.json();
+        } catch (error) {
+            searchResults.value = [];
+        }
 });
 </script>
 
@@ -38,11 +43,11 @@ watch(searchTerm, async (newSearch, oldSearch) => {
             }}
             for "{{ searchTerm }}"
         </div>
-        <Link v-for="recipe in searchResults" :key="recipe.id" :href="route('recipe.show', recipe.id)">
+        <Link v-for="recipe in searchResults" :key="recipe.id" :href="route('recipe.show', recipe.id)" scroll-region>
         <RecipeCard :recipe="recipe" />
         </Link>
         <div v-show="searchTerm.length < 1">
-            <Link v-for="recipe in recipes" :key="recipe.id" :href="route('recipe.show', recipe.id)">
+            <Link v-for="recipe in recipes" :key="recipe.id" :href="route('recipe.show', recipe.id)" scroll-region>
             <RecipeCard :recipe="recipe" />
             </Link>
         </div>

@@ -1,7 +1,12 @@
 <script setup>
 import { Head, Link } from '@inertiajs/inertia-vue3';
+import { computed } from 'vue';
 import TheLayout from '@/Layouts/TheLayout.vue';
+import VegifyLogo from '@/Assets/VegifyLogo/TheVegifyLogo.vue';
 import Login from '@/Pages/Auth/Login.vue';
+import Register from '@/Pages/Auth/Register.vue';
+import VegifyLogin from '@/Layouts/VegifyLogin.vue';
+
 
 
 import VegifySearch from '@/Pages/VegifySearch.vue';
@@ -13,6 +18,7 @@ defineProps({
     recipes: Object,
 });
 
+const loginOrRegister = ref('login');
 
 </script>
 
@@ -22,14 +28,12 @@ defineProps({
     <TheLayout>
         <template #header>
 
-            <Link :href="route('home')">Welcome</Link>
-
         </template>
         <VegifySearch />
         <template v-slot:sidebar>
-            <div v-if="canLogin" class="text-right w-full">
+            <div v-if="canLogin" class="w-full">
                 <div v-if="$page.props.auth.user">
-                    <header class="font-bold text-2xl px-4 dark:text-gray-light">
+                    <header class="font-bold text-right text-2xl px-4 dark:text-gray-light">
                         Welcome back, {{ $page.props.auth.user.name }}.
                     </header>
                     <Link :href="
@@ -40,16 +44,30 @@ defineProps({
                     |
 
                     <Link class="py-4 pr-4 text-sm text-gray-700 dark:text-gray-light underline" :href="route('logout')"
-                        method="post" as="button">
+                        method="post" as="button" preserve-scroll>
                     Log Out
                     </Link>
                 </div>
 
                 <template v-else>
                     <header class="font-bold text-2xl px-8 pb-6 pt-0 sm:text-center xl:text-right dark:text-gray-light">
-                        Start tracking recipes with us, today.
+                        <span class="text-right">Start tracking recipes with us, today.</span>
+                        <Link href="/" class="w-20 h-20 m-2">
+                        <!-- <VegifyLogo type="icon" color="greenwhite" /> -->
+                        </Link>
                     </header>
-                    <Login />
+
+                    <VegifyLogo type="icon" color="greenwhite" class="h-20 mx-auto my-4 w-auto" />
+
+                    <div class="mx-auto my-4 pt-8 text-center w-full" scroll-region>
+                        <input type="radio" id="login" value="login" v-model="loginOrRegister" class="mx-2" />
+                        <label for="login" class="">Login</label> or
+                        <input type="radio" id="register" value="register" v-model="loginOrRegister" class="mx-2" />
+                        <label for="login">Signup</label>
+                    </div>
+                    <Login v-if="loginOrRegister === 'login'" />
+                    <Register v-else />
+
                 </template>
             </div>
         </template>

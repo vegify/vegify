@@ -1,8 +1,8 @@
 <script setup>
-import BreezeButton from '@/Components/Button.vue';
+import Button from '@/Components/Button.vue';
 import BreezeCheckbox from '@/Components/Checkbox.vue';
 import BreezeGuestLayout from '@/Layouts/Guest.vue';
-import BreezeInput from '@/Components/Input.vue';
+import Input from '@/Components/Input.vue';
 import BreezeLabel from '@/Components/Label.vue';
 import BreezeValidationErrors from '@/Components/ValidationErrors.vue';
 import { Head, Link, useForm } from '@inertiajs/inertia-vue3';
@@ -22,12 +22,12 @@ const form = useForm({
 const submit = () => {
     form.post(route('login'), {
         onFinish: () => form.reset('password'),
+        preserveState: true,
+        preserveScroll: true,
     });
 };
 
-let signUpDisabled = ref(false);
-// signUpDisabled = computed(() => form.email.length > 1);
-signUpDisabled = computed(() => {
+const signUpDisabled = computed(() => {
     return form.email.length > 0 || form.password.length > 0 || form.processing;
 });
 </script>
@@ -45,14 +45,13 @@ signUpDisabled = computed(() => {
 
         <form @submit.prevent="submit">
             <div>
-                <BreezeInput id="email" type="email" placeholder="Email..." class="mt-1 block w-full border-gray"
-                    v-model="form.email" required autocomplete="username" />
+                <Input id="login-email" name="email" type="email" placeholder="Email..." class="" v-model="form.email"
+                    required autocomplete="username" />
             </div>
 
             <div class="mt-4">
-                <BreezeInput id="password" type="password" placeholder="Password..."
-                    class="mt-1 block w-full border-gray" v-model="form.password" required
-                    autocomplete="current-password" />
+                <Input id="login-password" name="password" type="password" placeholder="Password..." class=""
+                    v-model="form.password" required autocomplete="current-password" />
             </div>
 
             <div class="block mt-4">
@@ -68,21 +67,16 @@ signUpDisabled = computed(() => {
                 Forgot your password?
                 </Link>
             </div>
-            <div class="flex-col text-center text-yellow-orange dark:text-white text-2xl font-bold w-4/5 mx-auto mb-10">
-                <BreezeButton
-                    class="border-2 rounded-full py-1 text-2xl normal-case w-full mx-auto text-center tracking-normal bg-gray-light dark:bg-gray text-yellow-orange dark:text-white border-yellow-orange dark:border-white hover:bg-[rgba(255,255,255,0.5)] dark:hover:bg-[rgba(255,255,255,0.5)] active:bg-[rgba(255,255,255,0.2)]"
+            <div
+                class="flex-col text-center text-yellow-orange dark:text-white text-2xl font-bold w-4/5 mx-auto mt-3 mb-10">
+                <Button
+                    class="
+                        border-2 rounded-full py-1 text-2xl normal-case w-full mx-auto text-center tracking-normal bg-yellow-orange text-white border-yellow-orange hover:bg-[rgba(255,255,255,0.1)] dark:hover:border-[rgba(0,0,0,0)] dark:hover:bg-[rgba(255,255,255,0.5)] active:bg-[rgba(255,255,255,0.2)]"
                     :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                     Log in
-                </BreezeButton>
-                <div v-if="!signUpDisabled">
-                    <p>or</p>
-                    <a class="border-2 rounded-full disabled:hidden py-1 text-2xl normal-case w-full mx-auto text-center tracking-normal bg-yellow-orange text-white border-yellow-orange hover:bg-[rgba(0,0,0,0.1)] dark:hover:bg-[rgba(0,0,0,0.1)] active:bg-[rgba(0,0,0,0.05)] dark:active:bg-[rgba(0,0,0,0.05)]"
-                        type="button" @click="prevent" :href="route('register')"
-                        :class="{ 'opacity-25': form.processing }" :disabled="signUpDisabled">
-                        Sign Up
-                    </a>
-                </div>
+                </Button>
             </div>
         </form>
+
     </BreezeGuestLayout>
 </template>
