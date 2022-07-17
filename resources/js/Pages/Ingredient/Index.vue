@@ -1,6 +1,7 @@
 <script setup>
 import TheLayout from '@/Layouts/TheLayout.vue';
 import { Head, Link } from '@inertiajs/inertia-vue3';
+import EmptyState from '@/Assets/EmptyState.vue';
 
 defineProps({
     ingredients: Object,
@@ -12,7 +13,7 @@ defineProps({
     <Head title="Ingredient" />
     <TheLayout>
         <template #header> Ingredients </template>
-        <div class="py-12">
+        <div class="py-6">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white dark:bg-gray-800 dark:text-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div
@@ -20,20 +21,31 @@ defineProps({
                         v-for="ingredient in ingredients"
                         :key="ingredient.id"
                     >
-                        <div>
+                        <Link
+                            :href="route('ingredient.show', ingredient)"
+                            class="inline"
+                        >
+                        <EmptyState
+                            type="thumbnail"
+                            class="inline h-20 align-bottom"
+                        />
+                        </Link>
+                        <div class="inline ml-4 align-top">
                             <Link
                                 :href="route('ingredient.show', ingredient)"
-                                class="hover:underline text:indigo-700 dark:text-indigo-50"
+                                class="hover:underline"
                             > {{ ingredient.name }} </Link>
+                            <div class="">{{ ingredient.description }}</div>
                         </div>
-                        <div>{{ ingredient.description }}</div>
                         <div> {{ ingredient.is_vegan ? 'Vegan!' : 'Not vegan!' }} </div>
-                        <div> Serving size: {{ `${ingredient.serving_size.amount} ${ingredient.serving_size.unit}
-                                                    (${ingredient.serving_size.grams} grams)`
-                        }} </div>
-                        <div> Batch size: {{ `${ingredient.batch_size.amount} ${ingredient.batch_size.unit}
-                                                    (${ingredient.batch_size.grams} grams)`
-                        }} </div>
+                        <div class="flex">
+                            <div> Serving size: {{ `${ingredient.serving_size.amount} ${ingredient.serving_size.unit}
+                                                            (${ingredient.serving_size.grams} grams)`
+                            }} </div>
+                            <div> Batch size: {{ `${ingredient.batch_size.amount} ${ingredient.batch_size.unit}
+                                                            (${ingredient.batch_size.grams} grams)`
+                            }} </div>
+                        </div>
                     </div>
                 </div>
             </div>
