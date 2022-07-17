@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="812px" height="435px" viewBox="0 0 812 435" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Recipe Image</title>
+    <g id="Page/3.Recipes/1.0.View-Recipe" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Page/3.1.0/Recipes/View-Recipe/Desktop-HD" transform="translate(-315.000000, -106.000000)">
+            <g id="Center" transform="translate(315.000000, 12.000000)">
+                <g id="Recipe-Image" transform="translate(0.000000, 94.000000)">
+                    <g id="Image" stroke="#C2C2C2" stroke-width="0.92">
+                        <rect id="Rectangle" x="0.46" y="0.46" width="807.15601" height="434.08" rx="2.76"></rect>
+                        <g id="basic_picture" transform="translate(252.000000, 114.000000)">
+                            <rect id="Rectangle-path" x="0.597826087" y="0.749094203" width="304" height="206" rx="2.76"></rect>
+                            <polyline id="Shape" points="0.597826087 177.930912 113.37202 79.7490942 172.210729 138.658185 201.630084 99.3854578 304.597826 187.749094"></polyline>
+                            <circle id="Oval" cx="246.097826" cy="55.2490942" r="24.5"></circle>
+                        </g>
+                    </g>
+                    <text font-family="Lato-Bold, Lato" font-size="14.72" font-weight="bold" fill="#C2C2C2">
+                        <tspan x="364.11968" y="84">Recipe Image</tspan>
+                    </text>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -75,12 +75,14 @@ const loginOrRegister = ref('login');
                                 v-model="loginOrRegister"
                                 value="register"
                                 label="Signup"
+                                side="l"
                             />
                             <div class="w-3 bg-gray-300"></div>
                             <RadioNavTab
                                 v-model="loginOrRegister"
                                 value="login"
                                 label="Login"
+                                side="r"
                             />
                         </div>
                         <div class="h-[350px]">

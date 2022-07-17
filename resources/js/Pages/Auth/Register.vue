@@ -78,7 +78,7 @@ const submit = () => {
                 />
             </div>
             <div
-                class="flex items-center justify-center flex-col text-center text-yellow-orange dark:text-white text-2xl font-bold w-4/5 mx-auto mt-3 mb-10">
+                class="flex items-center justify-center flex-col text-center text-yellow-orange dark:text-white text-2xl font-bold w-4/5 mx-auto mt-5 mb-10">
                 <Button
                     class="border-2 rounded-full py-1 text-2xl normal-case w-full mx-auto text-center tracking-normal bg-yellow-orange text-white border-yellow-orange hover:bg-[rgba(255,255,255,0.1)] dark:hover:border-[rgba(0,0,0,0)] dark:hover:bg-[rgba(255,255,255,0.5)] active:bg-[rgba(255,255,255,0.2)]"
                     :class="{ 'opacity-25': form.processing }"

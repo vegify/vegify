@@ -1,6 +1,7 @@
 <script setup>
 import TheLayout from '@/Layouts/TheLayout.vue';
 import { Head, Link } from '@inertiajs/inertia-vue3';
+import EmptyState from '@/Assets/EmptyState.vue';
 
 defineProps({
     recipe: Object,
@@ -14,18 +15,33 @@ defineProps({
         <template #header>
             <Link :href="route('recipes')">Recipes</Link> ➛ {{ `${recipe.as_ingredient.name}` }}
         </template>
-        <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="py-0">
+            <!-- Hero Image  -->
+            <div class="relative">
+                <div class="absolute mt-4 sm:mt-10 ml-10 font-serif text-4xl sm:text-7xl dark:text-white">{{
+                        recipe.as_ingredient.name
+                }} <div class="mt-2 text-lg sm:text-xl font-sans"> {{ recipe.subtitle }}
+                    </div>
+                </div>
+                <div class="absolute text-xs sm:text-sm top-1 sm:top-5 lg:top-7 right-[10%] dark:text-white"> {{
+                        recipe.as_ingredient.is_vegan ? 'Vegan!' : 'Not vegan!'
+                }} </div>
+                <div class="absolute bottom-10 right-[10%] dark:text-white">by
+                    <Link
+                        :href="route('user.show', recipe.creator)"
+                        class="text-2xl ml-2"
+                    >{{ recipe.creator.name }}</Link>
+                </div>
+                <EmptyState
+                    type="recipeImage"
+                    class="w-full m-0"
+                />
+            </div>
+            <!-- Recipe Content  -->
+            <div class="max-w-7xl mt-10 mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white dark:bg-gray-800 dark:text-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6 bg-white dark:bg-gray-700 border-b border-gray-200 dark:border-gray-900">
-                        <div class="text-3xl">{{ recipe.as_ingredient.name }}</div> by
-                        <Link
-                            :href="route('user.show', recipe.creator)"
-                            class="hover:underline text:indigo-700 dark:text-indigo-50"
-                        > @{{ recipe.creator.name }} </Link>
-                        <div>{{ recipe.subtitle }}</div>
                         <div>{{ recipe.description }}</div>
-                        <div> {{ recipe.as_ingredient.is_vegan ? 'Vegan!' : 'Not vegan!' }} </div>
                         <div> Serving Size: {{ `${recipe.as_ingredient.serving_size.amount}
                         ${recipe.as_ingredient.serving_size.unit} (${recipe.as_ingredient.serving_size.grams}
                         grams)` }} </div>
