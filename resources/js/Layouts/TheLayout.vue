@@ -18,10 +18,16 @@ const showBreadcrumbs = computed(() => currentName.value !== "home");
                         <div class="mx-4 my-4 text-sm dark:text-gray-light tracking-wide">
                             <!-- Breadcrumbs -->
                             <span v-if="showBreadcrumbs">
-                                <Link :href="route('home')" class="hover:underline">vegify</Link>
+                                <Link
+                                    :href="route('home')"
+                                    class="hover:underline"
+                                >vegify</Link>
                                 <span class="mx-2">➛</span>
                             </span>
-                            <span v-else class="h-[18px]">&nbsp;</span>
+                            <span
+                                v-else
+                                class="h-[18px]"
+                            >&nbsp;</span>
                             <slot name="header" />
                             <!-- Logo -->
                             <VegifyLogo class="h-auto w-5/6 md:w-4/5 mx-auto my-8 block" />
@@ -29,7 +35,11 @@ const showBreadcrumbs = computed(() => currentName.value !== "home");
                     </header>
                     <div>
                         <main class="grow bg-white dark:bg-gray-dark">
-                            <Transition name="slide-up" mode="out-in" appear>
+                            <Transition
+                                name="slide-up"
+                                mode="out-in"
+                                appear
+                            >
                                 <div v-if="$slots.default">
                                     <slot />
                                 </div>

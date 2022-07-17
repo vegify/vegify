@@ -24,21 +24,21 @@ const VegifyLogo = computed(() =>
         ? props.color == 'white'
             ? VegifyIconWhite
             : props.color == 'green'
-            ? VegifyIconGreen
-            : props.color == 'greenwhite'
-            ? VegifyIconGreenWhite
-            : preferredColorScheme.value == 'dark'
-            ? VegifyIconOrigBGDark
-            : VegifyIconOrigBGLight
+                ? VegifyIconGreen
+                : props.color == 'greenwhite'
+                    ? VegifyIconGreenWhite
+                    : preferredColorScheme.value == 'dark'
+                        ? VegifyIconOrigBGDark
+                        : VegifyIconOrigBGLight
         : props.color == 'white'
-        ? VegifyLogoWhite
-        : props.color == 'green'
-        ? VegifyLogoGreen
-        : props.color == 'greenwhite'
-        ? VegifyLogoGreenWhite
-        : preferredColorScheme.value == 'dark'
-        ? VegifyLogoOrigBGDark
-        : VegifyLogoOrigBGLight
+            ? VegifyLogoWhite
+            : props.color == 'green'
+                ? VegifyLogoGreen
+                : props.color == 'greenwhite'
+                    ? VegifyLogoGreenWhite
+                    : preferredColorScheme.value == 'dark'
+                        ? VegifyLogoOrigBGDark
+                        : VegifyLogoOrigBGLight
 );
 </script>
 

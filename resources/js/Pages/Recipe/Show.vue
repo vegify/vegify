@@ -19,42 +19,37 @@ defineProps({
                 <div class="bg-white dark:bg-gray-800 dark:text-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6 bg-white dark:bg-gray-700 border-b border-gray-200 dark:border-gray-900">
                         <div>{{ recipe.as_ingredient.name }}</div> by
-                        <Link :href="route('user.show', recipe.creator)"
-                            class="hover:underline text:indigo-700 dark:text-indigo-50"> @{{ recipe.creator.name }}
-                        </Link>
+                        <Link
+                            :href="route('user.show', recipe.creator)"
+                            class="hover:underline text:indigo-700 dark:text-indigo-50"
+                        > @{{ recipe.creator.name }} </Link>
                         <div>{{ recipe.subtitle }}</div>
                         <div>{{ recipe.description }}</div>
-                        <div>
-                            {{ recipe.as_ingredient.is_vegan
-                                    ? 'Vegan!'
-                                    : 'Not vegan!'
-                            }}
-                        </div>
-                        <div> Serving Size: {{ `${recipe.as_ingredient.serving_size.amount} ${recipe.as_ingredient.serving_size.unit}
-                                                                                (${recipe.as_ingredient.serving_size.grams} grams)`
-                        }}
-                        </div>
-                        <div> Batch Size: {{ `${recipe.as_ingredient.batch_size.amount} ${recipe.as_ingredient.batch_size.unit}
-                                                                                (${recipe.as_ingredient.batch_size.grams} grams)`
+                        <div> {{ recipe.as_ingredient.is_vegan ? 'Vegan!' : 'Not vegan!' }} </div>
+                        <div> Serving Size: {{ `${recipe.as_ingredient.serving_size.amount}
+                        ${recipe.as_ingredient.serving_size.unit} (${recipe.as_ingredient.serving_size.grams}
+                        grams)` }} </div>
+                        <div> Batch Size: {{ `${recipe.as_ingredient.batch_size.amount}
+                                                    ${recipe.as_ingredient.batch_size.unit} (${recipe.as_ingredient.batch_size.grams} grams)`
                         }}
                         </div>
                         <div class="mt-5">Ingredients:</div>
                         <ul class="">
-                            <li v-for="iir in recipe.ingredients" :key="iir.id" class="mt-2">
-                                <Link :href="
-                                    route(
-                                        'ingredient.show',
-                                        iir.ingredient.id
-                                    )
-                                " class="hover:underline text:indigo-700 dark:text-indigo-50">
-                                {{ iir.ingredient.name }}
-                                </Link>
-                                {{ iir.ingredient.is_vegan
-                                        ? 'Vegan!'
-                                        : 'Not vegan!'
-                                }}
-                                {{ iir.amount.amount }}
-                                {{ iir.amount.unit }} ({{ iir.amount.grams }} grams)
+                            <li
+                                v-for="iir in recipe.ingredients"
+                                :key="iir.id"
+                                class="mt-2"
+                            >
+                                <Link
+                                    :href="
+                                        route(
+                                            'ingredient.show',
+                                            iir.ingredient.id
+                                        )
+                                    "
+                                    class="hover:underline text:indigo-700 dark:text-indigo-50"
+                                > {{ iir.ingredient.name }} </Link> {{ iir.ingredient.is_vegan ? 'Vegan!' : 'Not vegan!'
+                                }} {{ iir.amount.amount }} {{ iir.amount.unit }} ({{ iir.amount.grams }} grams)
                             </li>
                         </ul>
                     </div>

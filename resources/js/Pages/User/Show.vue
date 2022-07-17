@@ -21,18 +21,16 @@ defineProps({
                     <div class="p-6 bg-white dark:bg-gray-700 border-b border-gray-200 dark:border-gray-900">
                         <div>@{{ user.name }}</div>
                         <div class="my-2 font-bold">Recipes:</div>
-                        <div v-for="recipe in user.recipes" :key="recipe.id" class="my-2 border-t-gray-50">
+                        <div
+                            v-for="recipe in user.recipes"
+                            :key="recipe.id"
+                            class="my-2 border-t-gray-50"
+                        >
                             <div>
-                                <Link :href="route('recipe.show', recipe.id)">{{ recipe.as_ingredient.name
-                                }}</Link>
+                                <Link :href="route('recipe.show', recipe.id)">{{ recipe.as_ingredient.name }}</Link>
                             </div>
                             <div>{{ recipe.as_ingredient.description }}</div>
-                            <div>
-                                {{ recipe.as_ingredient.is_vegan
-                                        ? 'Vegan!'
-                                        : 'Not vegan!'
-                                }}
-                            </div>
+                            <div> {{ recipe.as_ingredient.is_vegan ? 'Vegan!' : 'Not vegan!' }} </div>
                         </div>
                     </div>
                 </div>

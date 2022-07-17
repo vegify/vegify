@@ -33,7 +33,10 @@
     },
     "dependencies": {
         "@vueuse/core": "^8.7.5",
+        "eslint-plugin-prettier-vue": "^4.2.0",
+        "save-dev": "^0.0.1-security",
         "svgo": "^2.8.0",
+        "vue-eslint-parser": "^8.3.0",
         "vue-router": "^4.1.2"
     }
 }
