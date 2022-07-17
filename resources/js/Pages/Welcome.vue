@@ -64,7 +64,7 @@ const loginOrRegister = ref('login');
     </TheLayout>
 </template>
 
-<style>
+<style scoped>
 .slide-up-enter-active,
 .slide-up-leave-active {
     transition: all 0.2s ease-out;

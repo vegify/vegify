@@ -26,10 +26,16 @@ const navLinks = [
 ];
 
 const showMobileNav = ref(false);
+
+function hideMenu() {
+    showMobileNav.value = false;
+}
+
 </script>
 
 <template>
-    <nav class="sticky top-0 z-50 xl:block xl:z-0 xl:bg-green xl:dark:bg-forest-green" ref="navRef">
+    <nav class="sticky top-0 z-50 xl:block xl:z-0 xl:bg-green xl:dark:bg-forest-green" ref="navRef"
+        v-clickOutside="hideMenu">
         <div class="bg-green dark:bg-forest-green py-2 relative z-50">
             <HamburgerMenuIcon class="w-9 h-9 absolute top-2 left-2 xl:hidden"
                 @click="showMobileNav = !showMobileNav" />
@@ -44,8 +50,7 @@ const showMobileNav = ref(false);
                     <Link v-for="(navLink, index) in navLinks" :key="index" :href="route(navLink.route)"
                         :active="route().current().startsWith(navLink.active)">
                     <li class="font-bold text-white text-3xl hover:underline p-2 hover:bg-[rgba(255,255,255,0.125)]">
-                        <img :src="navLink.icon" class="h-10 w-10 inline mr-[10px] mb-[9px]" /><span class="">{{
-                                navLink.label
+                        <img :src="navLink.icon" class="h-10 w-10 inline mr-[10px] mb-[9px]" /><span class="">{{ navLink.label
                         }}</span>
                     </li>
                     </Link>
