@@ -1,4 +1,5 @@
 root = true
+editor.formatOnSave = false
 
 [*]
 charset = utf-8

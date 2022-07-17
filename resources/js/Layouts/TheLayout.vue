@@ -1,12 +1,12 @@
 <script setup>
-import { Head, Link } from '@inertiajs/inertia-vue3';
+import { Link } from '@inertiajs/inertia-vue3';
 import { ref, computed } from 'vue';
 import NavMenu from '@/Layouts/TheNavMenu.vue';
 import VegifyLogo from '@/Assets/VegifyLogo/TheVegifyLogo.vue';
 
 
 
-const currentName = ref(route().current());
+const currentName = ref(route().current()); // eslint-disable-line no-undef
 const showBreadcrumbs = computed(() => currentName.value !== "home");
 </script>
 

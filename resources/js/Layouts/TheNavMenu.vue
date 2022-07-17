@@ -1,5 +1,5 @@
 <script setup>
-import { Head, Link } from '@inertiajs/inertia-vue3';
+import { Link } from '@inertiajs/inertia-vue3';
 import HamburgerMenuIcon from '@/Assets/Icons/HamburgerMenuIcon.svg';
 import VegifyLogo from '@/Assets/VegifyLogo/TheVegifyLogo.vue';
 import UserIcon from '@/Assets/Icons/Profile.svg?url';

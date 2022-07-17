@@ -19,7 +19,7 @@ const form = useForm({
 });
 
 const submit = () => {
-    form.post(route('password.update'), {
+    form.post(route('password.update'), { // eslint-disable-line no-undef
         onFinish: () => form.reset('password', 'password_confirmation'),
     });
 };
@@ -27,6 +27,7 @@ const submit = () => {
 
 <template>
     <BreezeGuestLayout>
+
         <Head title="Reset Password" />
 
         <BreezeValidationErrors class="mb-4" />
@@ -34,17 +35,20 @@ const submit = () => {
         <form @submit.prevent="submit">
             <div>
                 <BreezeLabel for="email" value="Email" />
-                <BreezeInput id="email" type="email" class="mt-1 block w-full" v-model="form.email" required autofocus autocomplete="username" />
+                <BreezeInput id="email" type="email" class="mt-1 block w-full" v-model="form.email" required autofocus
+                    autocomplete="username" />
             </div>
 
             <div class="mt-4">
                 <BreezeLabel for="password" value="Password" />
-                <BreezeInput id="password" type="password" class="mt-1 block w-full" v-model="form.password" required autocomplete="new-password" />
+                <BreezeInput id="password" type="password" class="mt-1 block w-full" v-model="form.password" required
+                    autocomplete="new-password" />
             </div>
 
             <div class="mt-4">
                 <BreezeLabel for="password_confirmation" value="Confirm Password" />
-                <BreezeInput id="password_confirmation" type="password" class="mt-1 block w-full" v-model="form.password_confirmation" required autocomplete="new-password" />
+                <BreezeInput id="password_confirmation" type="password" class="mt-1 block w-full"
+                    v-model="form.password_confirmation" required autocomplete="new-password" />
             </div>
 
             <div class="flex items-center justify-end mt-4">

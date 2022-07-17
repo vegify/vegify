@@ -1,7 +1,6 @@
 
 <script setup>
 import { watch, ref, computed } from 'vue';
-import { Inertia } from '@inertiajs/inertia';
 import { Link } from '@inertiajs/inertia-vue3';
 import { usePage } from '@inertiajs/inertia-vue3'
 import RecipeCard from '@/Components/RecipeCard.vue';

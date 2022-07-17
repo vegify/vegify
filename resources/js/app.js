@@ -7,20 +7,16 @@ import { InertiaProgress } from '@inertiajs/progress';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { ZiggyVue } from '../../vendor/tightenco/ziggy/dist/vue.m';
 
-const appName =
-    window.document.getElementsByTagName('title')[0]?.innerText || 'Vegify';
+const appName = window.document.getElementsByTagName('title')[0]?.innerText || 'Vegify';
 
 createInertiaApp({
-    title: (title) => `${title} \| ${appName}`,
+    title: (title) => `${title} \| ${appName}`, // eslint-disable-line no-useless-escape
     resolve: (name) =>
-        resolvePageComponent(
-            `./Pages/${name}.vue`,
-            import.meta.glob('./Pages/**/*.vue')
-        ),
+        resolvePageComponent(`./Pages/${name}.vue`, import.meta.glob('./Pages/**/*.vue')),
     setup({ el, app, props, plugin }) {
         return createApp({ render: () => h(app, props) })
             .use(plugin)
-            .use(ZiggyVue, Ziggy)
+            .use(ZiggyVue, Ziggy) // eslint-disable-line no-undef
             .mount(el);
     },
 });

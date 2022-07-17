@@ -11,7 +11,7 @@ const form = useForm({
 });
 
 const submit = () => {
-    form.post(route('password.confirm'), {
+    form.post(route('password.confirm'), { // eslint-disable-line no-undef
         onFinish: () => form.reset(),
     })
 };
@@ -19,6 +19,7 @@ const submit = () => {
 
 <template>
     <BreezeGuestLayout>
+
         <Head title="Confirm Password" />
 
         <div class="mb-4 text-sm text-gray-600">
@@ -30,7 +31,8 @@ const submit = () => {
         <form @submit.prevent="submit">
             <div>
                 <BreezeLabel for="password" value="Password" />
-                <BreezeInput id="password" type="password" class="mt-1 block w-full" v-model="form.password" required autocomplete="current-password" autofocus />
+                <BreezeInput id="password" type="password" class="mt-1 block w-full" v-model="form.password" required
+                    autocomplete="current-password" autofocus />
             </div>
 
             <div class="flex justify-end mt-4">

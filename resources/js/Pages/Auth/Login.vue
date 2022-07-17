@@ -3,10 +3,8 @@ import Button from '@/Components/Button.vue';
 import BreezeCheckbox from '@/Components/Checkbox.vue';
 import BreezeGuestLayout from '@/Layouts/Guest.vue';
 import Input from '@/Components/Input.vue';
-import BreezeLabel from '@/Components/Label.vue';
 import BreezeValidationErrors from '@/Components/ValidationErrors.vue';
 import { Head, Link, useForm } from '@inertiajs/inertia-vue3';
-import { computed, ref } from 'vue';
 
 defineProps({
     canResetPassword: Boolean,
@@ -20,16 +18,12 @@ const form = useForm({
 });
 
 const submit = () => {
-    form.post(route('login'), {
+    form.post(route('login'), { // eslint-disable-line no-undef
         onFinish: () => form.reset('password'),
-        preserveState: true,
         preserveScroll: true,
     });
 };
 
-const signUpDisabled = computed(() => {
-    return form.email.length > 0 || form.password.length > 0 || form.processing;
-});
 </script>
 
 <template>
@@ -39,7 +33,7 @@ const signUpDisabled = computed(() => {
 
         <BreezeValidationErrors class="mb-4" />
 
-        <div v-if="status" class="mb-4 font-medium text-sm text-green-600">
+        <div v-if="status" class="font-medium text-sm text-green-600">
             {{ status }}
         </div>
 

@@ -2,6 +2,7 @@ import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
 import vue from '@vitejs/plugin-vue';
 import svgLoader from 'vite-svg-loader';
+import eslint from 'vite-plugin-eslint';
 
 export default defineConfig({
     plugins: [
@@ -23,5 +24,6 @@ export default defineConfig({
                 plugins: ['removeDimensions', 'sortAttrs'],
             },
         }),
+        eslint(),
     ],
 });
