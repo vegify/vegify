@@ -39,22 +39,24 @@ const loginOrRegister = ref('login');
                     </div>
                 </div>
                 <template v-else>
-                    <div class="px-6 sm:px-14 xl:px-6">
+                    <div class="px-7 sm:px-[29%] md:px-[30%] lg:px-[35%] xl:px-6 2xl:px-8">
                         <header
                             class="font-bold text-2xl px-8 pb-6 pt-0 sm:text-center xl:text-right dark:text-gray-light">
                             <span class="text-right">Start tracking recipes with us, today.</span>
-                            <VegifyLogo type="icon" color="greenwhite" class="h-20 mx-auto my-4 w-auto" />
+                            <VegifyLogo type="icon" color="greenwhite" class="h-20 mx-auto my-4 mt-10 w-auto" />
                         </header>
-                        <div class="m-0 p-2 text-center w-full bg-forest-green text-white font-bold flex justify-center rounded-md"
+                        <div class="m-0 mt-10 p-2 text-center w-full bg-forest-green text-white font-bold flex justify-center rounded-md"
                             scroll-region>
                             <RadioNavTab v-model="loginOrRegister" value="register" label="Signup" />
                             <div class="w-3 bg-gray-300"></div>
                             <RadioNavTab v-model="loginOrRegister" value="login" label="Login" />
                         </div>
-                        <Transition name="slide-up" mode="out-in">
-                            <Login v-if="loginOrRegister === 'login'" />
-                            <Register v-else-if="loginOrRegister === 'register'" />
-                        </Transition>
+                        <div class="h-[350px]">
+                            <Transition name="slide-up" mode="out-in">
+                                <Login v-if="loginOrRegister === 'login'" />
+                                <Register v-else-if="loginOrRegister === 'register'" />
+                            </Transition>
+                        </div>
                     </div>
                 </template>
             </div>
