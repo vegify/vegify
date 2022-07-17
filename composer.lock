@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5e50319b1752a53a1ddae045dcf5b4b3",
+    "content-hash": "8abce3becd0ec691ab94a35405eb761c",
     "packages": [
         {
             "name": "brick/math",
@@ -9059,6 +9059,51 @@
                 }
             ],
             "time": "2022-06-17T06:28:57+00:00"
+        },
+        {
+            "name": "styleci/cli",
+            "version": "v1.3.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/StyleCI/CLI.git",
+                "reference": "943bd1851a4e98c0f7f3ca4d6e5ec4cc9934a6a7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/StyleCI/CLI/zipball/943bd1851a4e98c0f7f3ca4d6e5ec4cc9934a6a7",
+                "reference": "943bd1851a4e98c0f7f3ca4d6e5ec4cc9934a6a7",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "ext-zlib": "*",
+                "php": "^7.2.5 || ^8.0"
+            },
+            "suggest": {
+                "ext-curl": "Required for high performance HTTP transport"
+            },
+            "bin": [
+                "bin/styleci"
+            ],
+            "type": "library",
+            "extra": {
+                "bin-dir": "bin"
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "StyleCI",
+                    "email": "support@styleci.io"
+                }
+            ],
+            "description": "The CLI tool for StyleCI",
+            "support": {
+                "source": "https://github.com/StyleCI/CLI/tree/v1.3.2"
+            },
+            "time": "2022-06-22T09:40:17+00:00"
         },
         {
             "name": "theseer/tokenizer",

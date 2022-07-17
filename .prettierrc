@@ -3,5 +3,9 @@
     "tabWidth": 4,
     "useTabs": false,
     "singleQuote": true,
-    "trailingCommaPHP": true
+    "trailingCommaPHP": true,
+    "trailingComma": "all",
+    "singleAttributePerLine": true,
+    "braceStyle": "psr-2",
+    "printWidth": 100
 }
