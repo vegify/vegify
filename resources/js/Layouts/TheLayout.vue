@@ -49,7 +49,7 @@ const isSubPage = computed(() => currentName.value !== "home");
                     </div>
                 </main>
                 <aside
-                    class="bg-gray-light dark:bg-gray text-center md:text-left min-w-content xl:min-w-[315px] xl:max-w-[315px] py-3 sm:py-5"
+                    class="bg-gray-300 dark:bg-gray text-center md:text-left min-w-content xl:min-w-[315px] xl:max-w-[315px] py-3 sm:py-5"
                 >
                     <slot name="sidebar" />
                 </aside>

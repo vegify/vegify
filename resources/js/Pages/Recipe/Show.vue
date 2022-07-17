@@ -21,11 +21,12 @@ defineProps({
             <div class="relative">
                 <div class="absolute mt-4 sm:mt-10 ml-10 font-serif text-4xl sm:text-7xl dark:text-white">{{
                         recipe.as_ingredient.name
-                }} <div class="mt-2 text-lg sm:text-xl font-sans"> {{ recipe.subtitle }}
+                }}
+                    <div class="mt-2 text-lg sm:text-xl font-sans"> {{ recipe.subtitle }}
                     </div>
                 </div>
                 <div
-                    class="absolute text-xs sm:text-sm top-1 sm:top-5 lg:top-7 right-[10%] dark:text-white rounded-full p-4"
+                    class="absolute text-xs sm:text-sm top-1 sm:top-5 lg:top-7 right-[10%] font-bold text-white rounded-full p-4"
                     :class="[recipe.as_ingredient.is_vegan ? 'bg-green' : `bg-gray bg-[url('${XIcon}')]`]"
                 > {{ recipe.as_ingredient.is_vegan ? 'Vegan!' : 'Not vegan!' }} </div>
                 <div class="absolute bottom-10 right-[10%] dark:text-white">by
@@ -47,9 +48,8 @@ defineProps({
                         <div> Serving Size: {{ `${recipe.as_ingredient.serving_size.amount}
                         ${recipe.as_ingredient.serving_size.unit} (${recipe.as_ingredient.serving_size.grams}
                         grams)` }} </div>
-                        <div> Batch Size: {{ `${recipe.as_ingredient.batch_size.amount}
-                                                    ${recipe.as_ingredient.batch_size.unit} (${recipe.as_ingredient.batch_size.grams} grams)`
-                        }}
+                        <div> Batch Size:
+                            {{ `${recipe.as_ingredient.batch_size.amount} ${recipe.as_ingredient.batch_size.unit} (${recipe.as_ingredient.batch_size.grams} grams)` }}
                         </div>
                         <div class="mt-5">Ingredients:</div>
                         <ul class="">
