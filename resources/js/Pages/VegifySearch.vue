@@ -7,6 +7,14 @@ import RecipeCard from '@/Components/RecipeCard.vue';
 import SearchIcon from '@/Assets/Icons/Search.svg?url';
 import XIcon from '@/Assets/Icons/XIcon.svg?url';
 
+const props = defineProps({
+    isSubPage: {
+        type: Boolean,
+        default: false,
+        optional: true
+    }
+})
+
 const searchTerm = ref('');
 const searchResults = ref([]);
 
@@ -27,8 +35,11 @@ watch(searchTerm, async (newSearch) => {
 </script>
 
 <template>
-    <div class="dark:text-white">
-        <div class="relative my-10 mx-auto w-4/5 md:w-3/4 lg:w-2/3">
+    <div
+        class="dark:text-white"
+        :class="{ 'relative': props.isSubPage }"
+    >
+        <div class="relative mx-auto w-4/5 md:w-3/4 lg:w-2/3">
             <input
                 type="text"
                 id="search"
@@ -49,22 +60,27 @@ watch(searchTerm, async (newSearch) => {
                 :src="SearchIcon"
             />
         </div>
-        <div
-            v-if="searchTerm.length > 0"
-            class="mx-auto text-center text-lg"
-        >
-            <strong>{{ searchResults.length }}</strong> search result{{ searchResults.length === 1 ? '' : 's' }} for "{{
-            searchTerm }}"
+        <div :class="{ 'bg-gray-300 dark:bg-gray-600 ml-[10%] rounded-md m-5 absolute': props.isSubPage }">
+            <div
+                v-if="searchTerm.length > 0"
+                class="mx-auto text-center text-lg"
+            >
+                <strong>{{ searchResults.length }}</strong> search result{{ searchResults.length === 1 ? '' : 's' }} for
+                "{{ searchTerm }}"
+            </div>
+            <Link
+                v-for="recipe in searchResults"
+                :key="recipe.id"
+                :href="route('recipe.show', recipe.id)"
+                scroll-region
+            >
+            <RecipeCard :recipe="recipe" />
+            </Link>
         </div>
-        <Link
-            v-for="recipe in searchResults"
-            :key="recipe.id"
-            :href="route('recipe.show', recipe.id)"
-            scroll-region
+        <div
+            v-show="searchTerm.length < 1"
+            v-if="!isSubPage"
         >
-        <RecipeCard :recipe="recipe" />
-        </Link>
-        <div v-show="searchTerm.length < 1">
             <Link
                 v-for="recipe in recipes"
                 :key="recipe.id"

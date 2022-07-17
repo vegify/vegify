@@ -18,7 +18,7 @@ defineProps({
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white dark:bg-gray-800 dark:text-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6 bg-white dark:bg-gray-700 border-b border-gray-200 dark:border-gray-900">
-                        <div>{{ recipe.as_ingredient.name }}</div> by
+                        <div class="text-3xl">{{ recipe.as_ingredient.name }}</div> by
                         <Link
                             :href="route('user.show', recipe.creator)"
                             class="hover:underline text:indigo-700 dark:text-indigo-50"

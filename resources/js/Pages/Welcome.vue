@@ -7,6 +7,7 @@ import Register from '@/Pages/Auth/Register.vue';
 import VegifySearch from '@/Pages/VegifySearch.vue';
 import { ref } from 'vue';
 import RadioNavTab from '@/Components/RadioNavTab.vue';
+import TransitionSlideFade from '@/Assets/TransitionSlideFade.vue';
 
 defineProps({
     canLogin: Boolean,
@@ -26,7 +27,9 @@ const loginOrRegister = ref('login');
     <TheLayout>
         <template #header>
         </template>
-        <VegifySearch />
+        <!-- Logo -->
+        <VegifyLogo class="h-auto w-5/6 md:w-4/5 mx-auto my-8 block" />
+        <VegifySearch class="mx-auto" />
         <template v-slot:sidebar>
             <div
                 v-if="canLogin"
@@ -81,13 +84,10 @@ const loginOrRegister = ref('login');
                             />
                         </div>
                         <div class="h-[350px]">
-                            <Transition
-                                name="slide-up"
-                                mode="out-in"
-                            >
+                            <TransitionSlideFade>
                                 <Login v-if="loginOrRegister === 'login'" />
                                 <Register v-else-if="loginOrRegister === 'register'" />
-                            </Transition>
+                            </TransitionSlideFade>
                         </div>
                     </div>
                 </template>
@@ -95,18 +95,3 @@ const loginOrRegister = ref('login');
         </template>
     </TheLayout>
 </template>
-
-<style scoped>
-.slide-up-enter-active,
-.slide-up-leave-active {
-    transition: all 0.2s ease-out;
-}
-
-.slide-up-enter-from {
-    opacity: 0;
-}
-
-.slide-up-leave-to {
-    opacity: 0;
-}
-</style>
