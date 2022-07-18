@@ -3,7 +3,8 @@
     "scripts": {
         "dev": "vite",
         "build": "vite build && vite build --ssr",
-        "prettier": "prettier"
+        "prettier": "prettier",
+        "prepare": "husky install"
     },
     "devDependencies": {
         "@inertiajs/inertia": "^0.11.0",
@@ -28,7 +29,8 @@
         "vite-plugin-eslint": "^1.6.1",
         "vite-svg-loader": "^3.4.0",
         "vitest": "^0.17.0",
-        "vue": "^3.2.31"
+        "vue": "^3.2.31",
+        "husky": "^8.0.0"
     },
     "dependencies": {
         "@vueuse/core": "^8.7.5",
