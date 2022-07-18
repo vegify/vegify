@@ -2,6 +2,5 @@
 . "$(dirname -- "$0")/_/husky.sh"
 
 ./vendor/bin/sail up -d
-./vendor/bin/sail artisan migrate:fresh --seed
 ./vendor/bin/sail test
-./vendor/bin/sail dusk
+./vendor/bin/sail dusk --testdox
