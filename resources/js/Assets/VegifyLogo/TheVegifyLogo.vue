@@ -43,5 +43,5 @@ const VegifyLogo = computed(() =>
 </script>
 
 <template>
-    <VegifyLogo />
+    <VegifyLogo alt="Vegify" />
 </template>

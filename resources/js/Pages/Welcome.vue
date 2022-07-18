@@ -28,7 +28,10 @@ const loginOrRegister = ref('login');
         <template #header>
         </template>
         <!-- Logo -->
-        <VegifyLogo class="h-auto w-5/6 md:w-4/5 mx-auto my-8 block" />
+        <VegifyLogo
+            class="h-auto w-5/6 md:w-4/5 mx-auto my-8 block"
+            dusk="vegify-splash-logo"
+        />
         <VegifySearch class="mx-auto" />
         <template v-slot:sidebar>
             <div
