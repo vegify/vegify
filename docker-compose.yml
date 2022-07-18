@@ -42,7 +42,7 @@ services:
         networks:
             - sail
         healthcheck:
-            test: ["CMD", "pg_isready", "-q", "-d", "${DB_DATABASE}", "-U", "${DB_USERNAME}"]
+            test: ['CMD', 'pg_isready', '-q', '-d', '${DB_DATABASE}', '-U', '${DB_USERNAME}']
             retries: 3
             timeout: 5s
     redis:
@@ -54,7 +54,7 @@ services:
         networks:
             - sail
         healthcheck:
-            test: ["CMD", "redis-cli", "ping"]
+            test: ['CMD', 'redis-cli', 'ping']
             retries: 3
             timeout: 5s
     meilisearch:
@@ -66,11 +66,14 @@ services:
         networks:
             - sail
         healthcheck:
-            test: ["CMD", "wget", "--no-verbose", "--spider",  "http://localhost:7700/health"]
+            test: ['CMD', 'wget', '--no-verbose', '--spider', 'http://localhost:7700/health']
             retries: 3
             timeout: 5s
     selenium:
         image: 'selenium/standalone-chrome'
+        ports:
+            - '${SELENIUM_PORT:-4444}:4444'
+            - '${VNC_PORT:-5900}:5900'
         volumes:
             - '/dev/shm:/dev/shm'
         networks:
@@ -81,7 +84,7 @@ services:
             - '${FORWARD_MAILHOG_PORT:-1025}:1025'
             - '${FORWARD_MAILHOG_DASHBOARD_PORT:-8025}:8025'
         networks:
-            - sail            
+            - sail
 networks:
     sail:
         driver: bridge
