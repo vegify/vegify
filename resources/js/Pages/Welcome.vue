@@ -4,7 +4,7 @@ import TheLayout from '@/Layouts/TheLayout.vue';
 import VegifyLogo from '@/Assets/VegifyLogo/TheVegifyLogo.vue';
 import Login from '@/Pages/Auth/Login.vue';
 import Register from '@/Pages/Auth/Register.vue';
-import VegifySearch from '@/Pages/VegifySearch.vue';
+import VegifySearch from '@/Components/VegifySearch.vue';
 import { ref } from 'vue';
 import RadioNavTab from '@/Components/RadioNavTab.vue';
 import TransitionSlideFade from '@/Assets/TransitionSlideFade.vue';

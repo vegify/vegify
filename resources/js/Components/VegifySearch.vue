@@ -65,7 +65,8 @@ watch(searchTerm, async (newSearch) => {
                 v-if="searchTerm.length > 0"
                 class="mx-auto text-center text-lg"
             >
-                <strong>{{ searchResults.length }}</strong> search result{{ searchResults.length === 1 ? '' : 's' }} for
+                <strong data-testid="search-result-count">{{ searchResults.length }}</strong> search
+                result{{ searchResults.length === 1 ? '' : 's' }} for
                 "{{ searchTerm }}"
             </div>
             <Link

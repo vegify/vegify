@@ -26,4 +26,11 @@ export default defineConfig({
         }),
         eslint(),
     ],
+    test: {
+        globals: true,
+        environment: 'happy-dom',
+        coverage: {
+            reporter: ['text', 'json', 'html'],
+        },
+    },
 });

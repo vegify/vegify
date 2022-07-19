@@ -1,6 +1,7 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-./vendor/bin/sail up -d
+./vendor/bin/sail restart
+./vendor/bin/sail npm test run
 ./vendor/bin/sail test
 ./vendor/bin/sail dusk --testdox

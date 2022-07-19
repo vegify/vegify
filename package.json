@@ -4,7 +4,9 @@
         "dev": "vite",
         "build": "vite build && vite build --ssr",
         "prettier": "prettier",
-        "prepare": "husky install"
+        "prepare": "husky install",
+        "test": "vitest",
+        "coverage": "vitest run --coverage"
     },
     "devDependencies": {
         "@inertiajs/inertia": "^0.11.0",
@@ -16,11 +18,16 @@
         "@tailwindcss/typography": "^0.5.2",
         "@vitejs/plugin-vue": "^2.3.3",
         "@vue/server-renderer": "^3.2.31",
+        "@vue/test-utils": "^2.0.2",
         "autoprefixer": "^10.4.2",
         "axios": "^0.25.0",
+        "c8": "^7.11.3",
         "eslint": "^8.20.0",
         "eslint-config-prettier": "^8.5.0",
         "eslint-plugin-vue": "^9.2.0",
+        "happy-dom": "^6.0.4",
+        "husky": "^8.0.0",
+        "jsdom": "^20.0.0",
         "laravel-vite-plugin": "^0.2.1",
         "lodash": "^4.17.19",
         "postcss": "^8.4.6",
@@ -29,8 +36,7 @@
         "vite-plugin-eslint": "^1.6.1",
         "vite-svg-loader": "^3.4.0",
         "vitest": "^0.17.0",
-        "vue": "^3.2.31",
-        "husky": "^8.0.0"
+        "vue": "^3.2.31"
     },
     "dependencies": {
         "@vueuse/core": "^8.7.5",

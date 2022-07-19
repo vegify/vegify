@@ -2,7 +2,7 @@
 import { Link } from '@inertiajs/inertia-vue3';
 import { ref, computed } from 'vue';
 import NavMenu from '@/Layouts/TheNavMenu.vue';
-import VegifySearch from '@/Pages/VegifySearch.vue';
+import VegifySearch from '@/Components/VegifySearch.vue';
 import TransitionSlideFade from '@/Assets/TransitionSlideFade.vue';
 
 const currentName = ref(route().current()); // eslint-disable-line no-undef
