@@ -4,7 +4,8 @@
 /public/storage
 /storage/ssr
 /storage/*.key
-/vendor
+/vendor/*
+!/vendor/bin/
 .env
 .env.backup
 .phpunit.result.cache
