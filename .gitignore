@@ -5,8 +5,6 @@
 /storage/ssr
 /storage/*.key
 /vendor/*
-!/vendor/bin/
-!vendor/laravel/
 .env
 .env.backup
 .phpunit.result.cache
